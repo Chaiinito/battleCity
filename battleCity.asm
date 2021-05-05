@@ -20,132 +20,132 @@
 	BATTLE_CITY:
 	#BATTLE CITY
 		#B
-        	li $a0, 13
+        	li $a0, 05
         	li $a1, 03
         	lw $a2, colorBrick
         	li $a3, 09
         	jal DrawVerticalLine
 
-        	li $a0, 16
+        	li $a0, 08
         	li $a1, 04
         	lw $a2, colorBrick
         	li $a3, 05
         	jal DrawVerticalLine
 
-        	li $a0, 16
+        	li $a0, 08
         	li $a1, 07
         	lw $a2, colorBrick
         	li $a3, 08
         	jal DrawVerticalLine
         	
-        	li $a0, 13
+        	li $a0, 05
         	li $a1, 03
         	lw $a2, colorBrick
-        	li $a3, 15
+        	li $a3, 07
         	jal DrawHorizontalLine
 
-        	li $a0, 13
+        	li $a0, 05
         	li $a1, 06
         	lw $a2, colorBrick 
-        	li $a3, 15
+        	li $a3, 07
         	jal DrawHorizontalLine
 
-		li $a0, 13
+		li $a0, 05
         	li $a1, 09
         	lw $a2, colorBrick
-        	li $a3, 15
+        	li $a3, 07
         	jal DrawHorizontalLine
 	
-	
 		#A
-		li $a0, 18      
+		li $a0, 10     
 		li $a1, 04		
 		lw $a2, colorBrick	
 		li $a3, 09	
 		jal DrawVerticalLine
 		
-		li $a0, 21      
+		li $a0, 13    
 		li $a1, 04		
 		lw $a2, colorBrick	
 		li $a3, 09	
 		jal DrawVerticalLine
 		
-		li $a0, 19
+		li $a0, 11
 		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 20
+		li $a3, 12
 		jal DrawHorizontalLine
 	
-		li $a0, 19
+		li $a0, 11
 		li $a1, 06
 		lw $a2, colorBrick
-		li $a3, 20
+		li $a3, 12
 		jal DrawHorizontalLine
 	
 	
 		#T
-		li $a0, 23
+		li $a0, 14
 		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 27
+		li $a3, 18
 		jal DrawHorizontalLine
 		
-		li $a0, 25     
+		li $a0, 16   
 		li $a1, 03		
 		lw $a2, colorBrick	
 		li $a3, 09	
 		jal DrawVerticalLine
 		
 		#T
-		li $a0, 29
+		li $a0, 20
 		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 33
+		li $a3, 24
 		jal DrawHorizontalLine
 		
-		li $a0, 31      
+		li $a0, 22     
 		li $a1, 03		
 		lw $a2, colorBrick	
 		li $a3, 09	
 		jal DrawVerticalLine
 	
 		#L		
-		li $a0, 35
+		li $a0, 26
 		li $a1, 09
 		lw $a2, colorBrick
-		li $a3, 39
+		li $a3, 29
 		jal DrawHorizontalLine
 		
-		li $a0, 35      
+		li $a0, 26      
 		li $a1, 03		
 		lw $a2, colorBrick	
 		li $a3, 09	
 		jal DrawVerticalLine
 	
 		#E
-		li $a0, 41      
+		li $a0, 31      
 		li $a1, 03		
 		lw $a2, colorBrick	
 		li $a3, 09	
 		jal DrawVerticalLine
 		
-		li $a0, 41
+		li $a0, 31
 		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 44
+		li $a3, 34
 		jal DrawHorizontalLine
 		
-		li $a0, 41
+		li $a0, 31
 		li $a1, 06
 		lw $a2, colorBrick
-		li $a3, 44
+		li $a3, 34
 		jal DrawHorizontalLine
 		
-		li $a0, 41
+		li $a0, 31
 		li $a1, 09
 		lw $a2, colorBrick
-		li $a3, 44
+		li $a3, 34
 		jal DrawHorizontalLine
+	
 		#C
 		li $a0, 27
 		li $a1, 27
