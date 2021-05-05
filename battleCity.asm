@@ -20,17 +20,42 @@
 	BATTLE_CITY:
 	#BATTLE CITY
 		#B
-    		li $a0, 51
-       		li $a1, 49
-       		lw $a2, colorBrick
-        	li $a3, 54
+        	li $a0, 13
+        	li $a1, 03
+        	lw $a2, colorBrick
+        	li $a3, 09
         	jal DrawVerticalLine
 
-        	li $a0, 54
-        	li $a1, 50
+        	li $a0, 16
+        	li $a1, 04
         	lw $a2, colorBrick
-        	li $a3, 51
+        	li $a3, 05
         	jal DrawVerticalLine
+
+        	li $a0, 16
+        	li $a1, 07
+        	lw $a2, colorBrick
+        	li $a3, 08
+        	jal DrawVerticalLine
+        	
+        	li $a0, 13
+        	li $a1, 03
+        	lw $a2, colorBrick
+        	li $a3, 15
+        	jal DrawHorizontalLine
+
+        	li $a0, 13
+        	li $a1, 06
+        	lw $a2, colorBrick 
+        	li $a3, 15
+        	jal DrawHorizontalLine
+
+		li $a0, 13
+        	li $a1, 09
+        	lw $a2, colorBrick
+        	li $a3, 15
+        	jal DrawHorizontalLine
+	
 	
 		#A
 		li $a0, 34      
