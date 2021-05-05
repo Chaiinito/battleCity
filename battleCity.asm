@@ -461,157 +461,64 @@
 		jal DrawVerticalLine
 		
 		
-	#ITCRSC:
-		#I
-		li $a0, 18
-		li $a1, 27
-		lw $a2, colorBlanco
-		li $a3, 20
-		jal DrawHorizontalLine
-		
-		li $a0, 18
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 20
-		jal DrawHorizontalLine
-		
-		li $a0, 19      
-		li $a1, 28		
-		lw $a2, colorBlanco	
-		li $a3, 33	
-		jal DrawVerticalLine	
-		
+	#TEC:
+	
 		#T
-		li $a0, 22
-		li $a1, 27
+		li $a0, 20
+		li $a1, 28
 		lw $a2, colorBlanco
 		li $a3, 24
 		jal DrawHorizontalLine
 		
-		li $a0, 23      
+		li $a0, 22      
 		li $a1, 28		
 		lw $a2, colorBlanco	
 		li $a3, 33	
 		jal DrawVerticalLine
 		
-		#C
-		li $a0, 27
-		li $a1, 27
-		lw $a2, colorBlanco
-		li $a3, 29
-		jal DrawHorizontalLine
-		
-		li $a0, 27
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 29
-		jal DrawHorizontalLine
-		
+		#E
 		li $a0, 26      
-		li $a1, 27		
-		lw $a2, colorBlanco	
-		li $a3, 33	
-		jal DrawVerticalLine	
-		
-		#R
-		li $a0, 32
-		li $a1, 27
-		lw $a2, colorBlanco
-		li $a3, 34
-		jal DrawHorizontalLine
-		
-		li $a0, 32
-		li $a1, 30
-		lw $a2, colorBlanco
-		li $a3, 34
-		jal DrawHorizontalLine
-		
-		li $a0, 31      
-		li $a1, 27		
-		lw $a2, colorBlanco	
-		li $a3, 33	
-		jal DrawVerticalLine	
-		
-		li $a0, 34      
-		li $a1, 27		
-		lw $a2, colorBlanco	
-		li $a3, 30	
-		jal DrawVerticalLine	
-		
-		li $a0, 32
-		li $a1, 31
-		lw $a2, colorBlanco
-		li $a3, 32
-		jal DrawHorizontalLine
-		
-		li $a0, 33
-		li $a1, 32
-		lw $a2, colorBlanco
-		li $a3, 33
-		jal DrawHorizontalLine
-		
-		li $a0, 34
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 34
-		jal DrawHorizontalLine
-		
-		li $a0, 36
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 36
-		jal DrawHorizontalLine
-		
-		
-		#S
-		li $a0, 39
-		li $a1, 27
-		lw $a2, colorBlanco
-		li $a3, 41
-		jal DrawHorizontalLine
-		
-		li $a0, 39
-		li $a1, 30
-		lw $a2, colorBlanco
-		li $a3, 40
-		jal DrawHorizontalLine
-		
-		li $a0, 38
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 40
-		jal DrawHorizontalLine
-		
-		li $a0, 38      
 		li $a1, 28		
 		lw $a2, colorBlanco	
-		li $a3, 29	
-		jal DrawVerticalLine	
+		li $a3, 33	
+		jal DrawVerticalLine
 		
-		li $a0, 41     
-		li $a1, 31		
+		li $a0, 26
+		li $a1, 28
+		lw $a2, colorBlanco
+		li $a3, 29
+		jal DrawHorizontalLine
+		
+		li $a0, 26
+		li $a1, 31
+		lw $a2, colorBlanco
+		li $a3, 29
+		jal DrawHorizontalLine
+		
+		li $a0, 26
+		li $a1, 33
+		lw $a2, colorBlanco
+		li $a3, 29
+		jal DrawHorizontalLine
+		
+		#C
+		li $a0, 32
+		li $a1, 28
+		lw $a2, colorBlanco
+		li $a3, 34
+		jal DrawHorizontalLine
+		
+		li $a0, 32
+		li $a1, 33
+		lw $a2, colorBlanco
+		li $a3, 34
+		jal DrawHorizontalLine
+		
+		li $a0, 31     
+		li $a1, 29		
 		lw $a2, colorBlanco	
 		li $a3, 32	
 		jal DrawVerticalLine	
-		
-		#C
-		li $a0, 44
-		li $a1, 27
-		lw $a2, colorBlanco
-		li $a3, 46
-		jal DrawHorizontalLine
-		
-		li $a0, 44
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 46
-		jal DrawHorizontalLine
-		
-		li $a0, 43      
-		li $a1, 27		
-		lw $a2, colorBlanco	
-		li $a3, 33	
-		jal DrawVerticalLine
 		
 		#DIGITALES:
 		#D
