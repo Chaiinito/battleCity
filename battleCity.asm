@@ -225,168 +225,98 @@
 		jal DrawVerticalLine
 	#NICOLAS
 		#N
-		li $a0, 33      
-		li $a1, 03		
+		li $a0, 05     
+		li $a1, 13		
 		lw $a2, colorBlanco	
-		li $a3, 09	
+		li $a3, 19	
 		jal DrawVerticalLine	
 		
-		li $a0, 37      
-		li $a1, 03		
+		li $a0, 06     
+		li $a1, 14		
 		lw $a2, colorBlanco	
-		li $a3, 09	
+		li $a3, 15	
 		jal DrawVerticalLine
 
-		li $a0, 34      
-		li $a1, 03		
+		li $a0, 07      
+		li $a1, 15		
 		lw $a2, colorBlanco	
-		li $a3, 04	
+		li $a3, 16	
 		jal DrawVerticalLine
 	
-		li $a0, 35      
-		li $a1, 05		
+		li $a0, 08      
+		li $a1, 17		
 		lw $a2, colorBlanco	
-		li $a3, 07	
+		li $a3, 18	
 		jal DrawVerticalLine
 		
-		li $a0, 36      
-		li $a1, 08		
+		li $a0, 09      
+		li $a1, 13		
 		lw $a2, colorBlanco	
-		li $a3, 09	
+		li $a3, 19	
 		jal DrawVerticalLine
 
 		#I
-		li $a0, 18
-		li $a1, 27
+		li $a0, 11
+		li $a1, 13
 		lw $a2, colorBlanco
-		li $a3, 20
-		jal DrawHorizontalLine	
+		li $a3, 15
+		jal DrawHorizontalLine
+		
+		li $a0, 11
+		li $a1, 19
+		lw $a2, colorBlanco
+		li $a3, 15
+		jal DrawHorizontalLine
+		
+		li $a0, 13      
+		li $a1, 13		
+		lw $a2, colorBlanco	
+		li $a3, 19	
+		jal DrawVerticalLine	
 
 		#C
-		li $a0, 27
-		li $a1, 27
+		li $a0, 18
+		li $a1, 13
 		lw $a2, colorBlanco
-		li $a3, 29
+		li $a3, 20
 		jal DrawHorizontalLine
 		
-		li $a0, 27
-		li $a1, 33
+		li $a0, 18
+		li $a1, 19
 		lw $a2, colorBlanco
-		li $a3, 29
+		li $a3, 20
 		jal DrawHorizontalLine
 		
-		li $a0, 26      
-		li $a1, 27		
+		li $a0, 17      
+		li $a1, 14		
 		lw $a2, colorBlanco	
-		li $a3, 33	
+		li $a3, 18	
 		jal DrawVerticalLine	
 		
 		#O
-		li $a0, 27      
-		li $a1, 19		
+		li $a0, 22      
+		li $a1, 14		
 		lw $a2, colorBlanco	
-		li $a3, 25	
+		li $a3, 18	
 		jal DrawVerticalLine	
 		
-		li $a0, 30      
-		li $a1, 19		
+		li $a0, 25      
+		li $a1, 14		
 		lw $a2, colorBlanco	
-		li $a3, 25	
+		li $a3, 18	
 		jal DrawVerticalLine
 		
-		li $a0, 28
+		li $a0, 23
+		li $a1, 13
+		lw $a2, colorBlanco
+		li $a3, 24
+		jal DrawHorizontalLine
+		
+		li $a0, 23
 		li $a1, 19
 		lw $a2, colorBlanco
-		li $a3, 30
-		jal DrawHorizontalLine
-		
-		li $a0, 28
-		li $a1, 25
-		lw $a2, colorBlanco
-		li $a3, 30
+		li $a3, 24
 		jal DrawHorizontalLine		
-		
-		#L		
-		li $a0, 40
-		li $a1, 41
-		lw $a2, colorBlanco
-		li $a3, 43
-		jal DrawHorizontalLine
-		
-		li $a0, 40      
-		li $a1, 35		
-		lw $a2, colorBlanco	
-		li $a3, 40	
-		jal DrawVerticalLine		
-	
-		#A
-		li $a0, 34      
-		li $a1, 38		
-		lw $a2, colorBlanco	
-		li $a3, 41	
-		jal DrawVerticalLine
-		
-		li $a0, 38      
-		li $a1, 38		
-		lw $a2, colorBlanco	
-		li $a3, 41	
-		jal DrawVerticalLine
-		
-		li $a0, 35      
-		li $a1, 36		
-		lw $a2, colorBlanco	
-		li $a3, 38	
-		jal DrawVerticalLine
-		
-		li $a0, 37      
-		li $a1, 36		
-		lw $a2, colorBlanco	
-		li $a3, 38	
-		jal DrawVerticalLine
-		
-		li $a0, 36
-		li $a1, 35
-		lw $a2, colorBlanco
-		li $a3, 36
-		jal DrawHorizontalLine
-	
-		li $a0, 35
-		li $a1, 39
-		lw $a2, colorBlanco
-		li $a3, 38
-		jal DrawHorizontalLine
-	
-		#S
-		li $a0, 39
-		li $a1, 27
-		lw $a2, colorBlanco
-		li $a3, 41
-		jal DrawHorizontalLine
-		
-		li $a0, 39
-		li $a1, 30
-		lw $a2, colorBlanco
-		li $a3, 40
-		jal DrawHorizontalLine
-		
-		li $a0, 38
-		li $a1, 33
-		lw $a2, colorBlanco
-		li $a3, 40
-		jal DrawHorizontalLine
-		
-		li $a0, 38      
-		li $a1, 28		
-		lw $a2, colorBlanco	
-		li $a3, 29	
-		jal DrawVerticalLine	
-		
-		li $a0, 41     
-		li $a1, 31		
-		lw $a2, colorBlanco	
-		li $a3, 32	
-		jal DrawVerticalLine	
-	
 		#JOSELYN
 		#J
         	li $a0, 21
