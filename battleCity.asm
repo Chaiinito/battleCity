@@ -147,58 +147,82 @@
 		jal DrawHorizontalLine
 	
 		#C
-		li $a0, 27
-		li $a1, 27
+		li $a0, 41
+		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 29
+		li $a3, 43
 		jal DrawHorizontalLine
 		
-		li $a0, 27
-		li $a1, 33
-		li $a3, 29
+		li $a0, 41
+		li $a1, 09
+		li $a3, 43
 		jal DrawHorizontalLine
 		
-		li $a0, 26      
-		li $a1, 27		
+		li $a0, 40      
+		li $a1, 04		
 		lw $a2, colorBrick	
-		li $a3, 33	
+		li $a3, 08	
 		jal DrawVerticalLine	
 
 		#I
-		li $a0, 18
-		li $a1, 27
+		li $a0, 45
+		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 20
+		li $a3, 49
 		jal DrawHorizontalLine
 		
-		li $a0, 18
-		li $a1, 33
+		li $a0, 45
+		li $a1, 09
 		lw $a2, colorBrick
-		li $a3, 20
+		li $a3, 49
 		jal DrawHorizontalLine
 		
-		li $a0, 19      
-		li $a1, 28		
+		li $a0, 47      
+		li $a1, 04		
 		lw $a2, colorBrick	
-		li $a3, 33	
+		li $a3, 08	
 		jal DrawVerticalLine	
 
 		#T
-		li $a0, 22
-		li $a1, 27
+		li $a0, 51
+		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 24
+		li $a3, 55
 		jal DrawHorizontalLine
 		
-		li $a0, 23      
-		li $a1, 28		
+		li $a0, 53      
+		li $a1, 04		
 		lw $a2, colorBrick	
-		li $a3, 33	
+		li $a3, 09	
 		jal DrawVerticalLine
 		
 		#Y
 		
-
+		li $a0, 57
+		li $a1, 03
+		lw $a2, colorBrick
+		jal DrawPoint
+		
+		li $a0, 58
+		li $a1, 04
+		lw $a2, colorBrick
+		jal DrawPoint
+		
+		li $a0, 60
+		li $a1, 04
+		lw $a2, colorBrick
+		jal DrawPoint
+		
+		li $a0, 61
+		li $a1, 03
+		lw $a2, colorBrick
+		jal DrawPoint
+		
+		li $a0, 59      
+		li $a1, 05		
+		lw $a2, colorBrick	
+		li $a3, 09	
+		jal DrawVerticalLine
 	#NICOLAS
 		#N
 		li $a0, 33      
