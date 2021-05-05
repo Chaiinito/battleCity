@@ -58,40 +58,28 @@
 	
 	
 		#A
-		li $a0, 34      
-		li $a1, 38		
+		li $a0, 18      
+		li $a1, 04		
 		lw $a2, colorBrick	
-		li $a3, 41	
+		li $a3, 09	
 		jal DrawVerticalLine
 		
-		li $a0, 38      
-		li $a1, 38		
+		li $a0, 21      
+		li $a1, 04		
 		lw $a2, colorBrick	
-		li $a3, 41	
+		li $a3, 09	
 		jal DrawVerticalLine
 		
-		li $a0, 35      
-		li $a1, 36		
-		lw $a2, colorBrick	
-		li $a3, 38	
-		jal DrawVerticalLine
-		
-		li $a0, 37      
-		li $a1, 36		
-		lw $a2, colorBrick	
-		li $a3, 38	
-		jal DrawVerticalLine
-		
-		li $a0, 36
-		li $a1, 35
+		li $a0, 19
+		li $a1, 03
 		lw $a2, colorBrick
-		li $a3, 36
+		li $a3, 20
 		jal DrawHorizontalLine
 	
-		li $a0, 35
-		li $a1, 39
+		li $a0, 19
+		li $a1, 06
 		lw $a2, colorBrick
-		li $a3, 38
+		li $a3, 20
 		jal DrawHorizontalLine
 	
 	
