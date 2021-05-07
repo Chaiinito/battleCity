@@ -9,7 +9,7 @@
 	colorBrick:	.word 0x00FF3300
 	colorBlanco:	.word 0x00FFFFFF
 	backgroundColor:.word 0x00000000
-	PrimeraPartida:	.word 0
+	Begin	:	.word 0
 	velocidad: 	.word 50
 	
 	
@@ -22,14 +22,7 @@
 	Etank3x:	.word 63
 	Etank3y:	.word 62
 	anchoPantalla:	.word 64
-	
-
-
-
-
 .text
-
-
 	jal ClearBoard
 
 
@@ -742,7 +735,7 @@ Nombres:
 		li $a3, 40	
 		jal DrawVerticalLine
 	
-	PRESS_E:
+	PRESS1:
 		#P
 		li $a0, 21      
 		li $a1, 58		
@@ -914,26 +907,25 @@ Nombres:
 		jal DrawPoint
 		
 		
-PressA:
-		lw $t1, 0xFFFF0004		# check to see which key has been pressed
-		beq $t1, 0x00000031, InicioDelJuego # presiona e (minuscula exclusivamente)
+Press_1:
+		lw $t1, 0xFFFF0004		# Verifica que tecla se presionó
+		beq $t1, 0x00000031, Begin_game # presiona 1
 		
 		li $a0, 250	#
-		li $v0, 32	# pause for 250 milisec
+		li $v0, 32	# Pausa for 250 milisec
 		syscall		#
 		
-		j PressA    # Jump back to the top of the wait loop
+		j Press_1    # Jump back to the top of the wait loop
 		
-		sw $zero, 0xFFFF0000		# clear the button pushed bit
+		sw $zero, 0xFFFF0000		# Limpia el boton presionado
 
 
-InicioDelJuego:
+Begin_game:
 
-	li $a0, 1			#Carga 1 en $a0		
-	sw $a0, PrimeraPartida		#Guarda 1 en PrimeraPartida, de esta manera sabemos que ya se dio al menos una partida
+	li $a0, 1		#Carga 1 en $a0		
+	sw $a0, Begin		#Se guarda la primera partida
 
-	
-	# Coordenadas iniciales del jugador
+	# Coordenadas iniciales
 	li $t0, 1
 	sw $t0, Ptankx
 	li $t0, 31
@@ -950,6 +942,68 @@ InicioDelJuego:
 	sw $t0, Etank2y
 	li $t0, 62
 	sw $t0, Etank3y
+	
+	DrawMap:
+		jr $ra
+		li $a0, 26      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+
+		li $a0, 27      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+		
+		li $a0, 28      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+			
+		li $a0, 29      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+
+		li $a0, 35      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+		
+		li $a0, 36      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+		
+		li $a0, 37      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine	
+		
+		li $a0, 38      
+		li $a1, 120		
+		lw $a2, colorBrick	
+		li $a3, 128	
+		jal DrawVerticalLine
+		
+		li $a0, 30
+		li $a1, 120
+		lw $a2, colorBrick
+		li $a3, 34
+		jal DrawHorizontalLine
+		
+		li $a0, 30
+		li $a1, 121
+		lw $a2, colorBrick
+		li $a3, 34
+		jal DrawHorizontalLine	
 
 	jal ClearBoard
 				
@@ -1045,12 +1099,12 @@ DrawHorizontalLine:
 		lw $ra, 0($sp)		# put return back
    		addi $sp, $sp, 4
 
-		jr $ra
 		
 		
 		
-DibujarScore: 
-	# Draw Ship
+		
+DrawElements: 
+	# Dibujar tanque
 	li $a0, 1
 	lw $a0, Ptankx		# Carga en a0 la coordenada X de jugador
 	lw $a1, Ptanky 	# Carga en a0 la coordenada Y de jugador
@@ -1060,34 +1114,6 @@ DibujarScore:
 	jal DibujarPixel		# Dibuja el color en el pixel deseado
 
 	
-	# Dibuja lander
-	li $a0, 1
-	lw $a0, Etank1x	# Carga en a0 la coordenada X de jugador
-	lw $a1, Etank1y		# Carga en a0 la coordenada Y de jugador
-	jal ObtenerCoordenadas
-	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, colorEtank1	# Almacena el color del enemigo 1
-	jal DibujarPixel		# Dibuja el color en el pixel deseado
-	
-	# Dibuja bomber
-	li $a0, 1
-	lw $a0, Etank2x	# Carga en a0 la coordenada X de jugador
-	lw $a1, Etank2y		# Carga en a0 la coordenada Y de jugador
-	jal ObtenerCoordenadas
-	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, colorEtank2	# Almacena el color del enemigo 2
-	jal DibujarPixel		# Dibuja el color en el pixel deseado
-	
-	# Dibuja ovni
-	li $a0, 1
-	lw $a0, Etank3x	# Carga en a0 la coordenada X de jugador
-	lw $a1, Etank3y		# Carga en a0 la coordenada Y de jugador
-	jal ObtenerCoordenadas
-	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, colorEtank3    #macena el color del enemigo 3
-	jal DibujarPixel		# Dibuja el color en el pixel deseado
-
-
 
 
 
@@ -1142,8 +1168,4 @@ ClearBoard:
 		j StartCLoop
 	EndCLoop:
 		jr $ra
-
-
-
-
-
+		
