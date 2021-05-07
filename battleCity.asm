@@ -1,14 +1,17 @@
 .data
 
 	colorTank:	.word 0x00FFFF00
-	colorEtank1	.word 0x00F5F5F5
-	colorEtank2	.word 0x002E8B57
-	ColorEtank3	.word 0x00FF0000
+	colorEtank1:	.word 0x00F5F5F5
+	colorEtank2:	.word 0x002E8B57
+	colorEtank3:	.word 0x00FF0000
 	
 	colorBullet:	.word 0x00FFFFFF
 	colorBrick:	.word 0x00FF3300
 	colorBlanco:	.word 0x00FFFFFF
 	backgroundColor:.word 0x00000000
+	PrimeraPartida:	.word 0
+	velocidad: 	.word 50
+	
 	
 	Ptankx:		.word 0
 	Ptanky:		.word 31
@@ -239,7 +242,7 @@ NewGame:
 		li $a3, 09	
 		jal DrawVerticalLine
 
-	Nombres:	
+Nombres:	
 	#NICOLAS
 		#N
 		li $a0, 05     
@@ -739,7 +742,6 @@ NewGame:
 		li $a3, 40	
 		jal DrawVerticalLine
 	
-	
 	PRESS_E:
 		#P
 		li $a0, 21      
@@ -891,39 +893,36 @@ NewGame:
 		li $a3, 37
 		jal DrawHorizontalLine
 	
-		#E
+		#1
 		li $a0, 44      
 		li $a1, 58		
 		lw $a2, colorBlanco	
 		li $a3, 62	
 		jal DrawVerticalLine
 	
-		li $a0, 45
-		li $a1, 58
-		lw $a2, colorBlanco
-		li $a3, 46
-		jal DrawHorizontalLine
-		
-		li $a0, 45
-		li $a1, 60
+
+		li $a0, 43
+		li $a1, 62
 		lw $a2, colorBlanco
 		li $a3, 45
 		jal DrawHorizontalLine
 		
-		li $a0, 45
-		li $a1, 62
+		
+		li $a0, 43
+		li $a1, 58
 		lw $a2, colorBlanco
-		li $a3, 46
-		jal DrawHorizontalLine
+		jal DrawPoint
+		
+		
 PressA:
 		lw $t1, 0xFFFF0004		# check to see which key has been pressed
-		beq $t1, 0x00000065, InicioDelJuego # presiona e (minuscula exclusivamente)
+		beq $t1, 0x00000031, InicioDelJuego # presiona e (minuscula exclusivamente)
 		
 		li $a0, 250	#
 		li $v0, 32	# pause for 250 milisec
 		syscall		#
 		
-		j SelectMode    # Jump back to the top of the wait loop
+		j PressA    # Jump back to the top of the wait loop
 		
 		sw $zero, 0xFFFF0000		# clear the button pushed bit
 
@@ -936,21 +935,21 @@ InicioDelJuego:
 	
 	# Coordenadas iniciales del jugador
 	li $t0, 1
-	sw $t0, PtankX
+	sw $t0, Ptankx
 	li $t0, 31
-	sw $t0, PtankY
+	sw $t0, Ptanky
 	li $t0, 50
 	sw $t0, velocidad
 	li $t0, 63
-	sw $t0, Etank1X
-	sw $t0, Etank2X
-	sw $t0, Etank3X
+	sw $t0, Etank1x
+	sw $t0, Etank2x
+	sw $t0, Etank3x
 	li $t0, 11
-	sw $t0, Etank1Y
+	sw $t0, Etank1y
 	li $t0, 38
-	sw $t0, Etank2Y
+	sw $t0, Etank2y
 	li $t0, 62
-	sw $t0, EtankY
+	sw $t0, Etank3y
 
 	jal ClearBoard
 				
@@ -1016,48 +1015,6 @@ DrawTank:
 # $a3 contains the column of the leftmost scoring dot.
 # Using this information, draws along the top of the screen to display a player's score			
 
-NewRound:
-
-		# Initialize all the regesters for a new iteration of the gameplay loop
-		li $t0, 1
-		li $t1, -1
-		sw $t0, ySpeed
-		sw $t1, yDir
-		sw $zero, compSpeed 	# reset compCount and compSpeed to 0 for first collision
-		sw $zero, compCount
-		
-		li $s0, 0 	# 0x01000000 up; 0x02000000 down; 0 stay
-		li $s1, 0	# 0x01000000 up; 0x02000000 down; 0 stay
-		lw $s2, xDir	# wait this long before you move over 1 x
-		lw $s3, ySpeed	# wait this long before you move over 1 y
-		li $s4, 13
-		li $s5, 13
-		li $s6, 32
-		li $s7, 0
-
-		jal ClearBoard
-		
-		lw $a2, P1Score
-		li $a3, 1
-		jal DrawScore
-		lw $a2, P2Score
-		li $a3, 54
-		jal DrawScore
-		
-		li $a0, 13
-		move $a1, $s4
-		lw $a2, colorOne
-		jal DrawPaddle
-		
-		li $a0, 50
-		move $a1, $s5
-		lw $a2, colorTwo
-		jal DrawPaddle
-
-		li $a0, 1000	#
-		li $v0, 32	# pause for 1 second
-		syscall		#
-
 
 DrawPoint:
 		sll $t0, $a1, 6   # multiply y-coordinate by 64 (length of the field)
@@ -1095,39 +1052,39 @@ DrawHorizontalLine:
 DibujarScore: 
 	# Draw Ship
 	li $a0, 1
-	lw $a0, PtankX		# Carga en a0 la coordenada X de jugador
-	lw $a1, PtankY 	# Carga en a0 la coordenada Y de jugador
+	lw $a0, Ptankx		# Carga en a0 la coordenada X de jugador
+	lw $a1, Ptanky 	# Carga en a0 la coordenada Y de jugador
 	jal ObtenerCoordenadas
 	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, shipColor	# Almacena el color del jugador
+	lw $a1, colorTank	# Almacena el color del jugador
 	jal DibujarPixel		# Dibuja el color en el pixel deseado
 
 	
 	# Dibuja lander
 	li $a0, 1
-	lw $a0, Etank1X		# Carga en a0 la coordenada X de jugador
-	lw $a1, Etank1Y		# Carga en a0 la coordenada Y de jugador
+	lw $a0, Etank1x	# Carga en a0 la coordenada X de jugador
+	lw $a1, Etank1y		# Carga en a0 la coordenada Y de jugador
 	jal ObtenerCoordenadas
 	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, ColorDorado	# Almacena el color del enemigo 1
+	lw $a1, colorEtank1	# Almacena el color del enemigo 1
 	jal DibujarPixel		# Dibuja el color en el pixel deseado
 	
 	# Dibuja bomber
 	li $a0, 1
-	lw $a0, Etank2X		# Carga en a0 la coordenada X de jugador
-	lw $a1, Etank2Y		# Carga en a0 la coordenada Y de jugador
+	lw $a0, Etank2x	# Carga en a0 la coordenada X de jugador
+	lw $a1, Etank2y		# Carga en a0 la coordenada Y de jugador
 	jal ObtenerCoordenadas
 	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, enemigoColor	# Almacena el color del enemigo 2
+	lw $a1, colorEtank2	# Almacena el color del enemigo 2
 	jal DibujarPixel		# Dibuja el color en el pixel deseado
 	
 	# Dibuja ovni
 	li $a0, 1
-	lw $a0, Etank3X		# Carga en a0 la coordenada X de jugador
-	lw $a1, Etank3Y		# Carga en a0 la coordenada Y de jugador
+	lw $a0, Etank3x	# Carga en a0 la coordenada X de jugador
+	lw $a1, Etank3y		# Carga en a0 la coordenada Y de jugador
 	jal ObtenerCoordenadas
 	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, enemigoColor	# Almacena el color del enemigo 3
+	lw $a1, colorEtank3    #macena el color del enemigo 3
 	jal DibujarPixel		# Dibuja el color en el pixel deseado
 
 
@@ -1175,8 +1132,8 @@ DrawVerticalLine:
 
 
 ClearBoard:
-		lw $t0, backgroundcolor
-		li $t1, 8192 # The number of pixels in the display
+		lw $t0, backgroundColor
+		li $t1, 32768 # The number of pixels in the display
 	StartCLoop:
 		subi $t1, $t1, 4
 		addu $t2, $t1, $gp
@@ -1185,11 +1142,6 @@ ClearBoard:
 		j StartCLoop
 	EndCLoop:
 		jr $ra
-
-
-
-
-
 
 
 
