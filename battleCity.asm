@@ -239,7 +239,8 @@ NewGame:
 		li $a3, 09	
 		jal DrawVerticalLine
 
-	NICOLAS:
+	Nombres:	
+	#NICOLAS
 		#N
 		li $a0, 05     
 		li $a1, 13		
@@ -333,8 +334,37 @@ NewGame:
 		lw $a2, colorBlanco
 		li $a3, 24
 		jal DrawHorizontalLine		
-
-	JOSELYN:
+	
+	
+		#Y
+		
+		li $a0, 28
+		li $a1, 13
+		lw $a2, colorBlanco
+		jal DrawPoint
+		
+		li $a0, 29
+		li $a1, 14
+		lw $a2, colorBlanco
+		jal DrawPoint
+		
+		li $a0, 31
+		li $a1, 14
+		lw $a2, colorBlanco
+		jal DrawPoint
+		
+		li $a0, 32
+		li $a1, 13
+		lw $a2, colorBlanco
+		jal DrawPoint
+		
+		li $a0, 30      
+		li $a1, 15		
+		lw $a2, colorBlanco	
+		li $a3, 19	
+		jal DrawVerticalLine
+		
+	#JOSELYN
 		#J
 		
 		li $a0, 35
