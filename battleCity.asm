@@ -1,4 +1,4 @@
-.data
+.data 
 
 	colorTank:	.word 0x00FFFF00
 	colorEtank1:	.word 0x00F5F5F5
@@ -22,10 +22,10 @@
 	Etank3x:	.word 63
 	Etank3y:	.word 62
 	anchoPantalla:	.word 64
+	
+	
 .text
 	jal ClearBoard
-
-
 NewGame:
 	BATTLE_CITY:
 	#BATTLE CITY
@@ -477,34 +477,34 @@ Nombres:
 	
 		#T
 		li $a0, 20
-		li $a1, 28
+		li $a1, 27
 		lw $a2, colorBlanco
 		li $a3, 24
 		jal DrawHorizontalLine
 		
 		li $a0, 22      
-		li $a1, 28		
+		li $a1, 27		
 		lw $a2, colorBlanco	
 		li $a3, 33	
 		jal DrawVerticalLine
 		
 		#E
 		li $a0, 26      
-		li $a1, 28		
+		li $a1, 27		
 		lw $a2, colorBlanco	
 		li $a3, 33	
 		jal DrawVerticalLine
 		
 		li $a0, 26
-		li $a1, 28
+		li $a1, 27
 		lw $a2, colorBlanco
 		li $a3, 29
 		jal DrawHorizontalLine
 		
 		li $a0, 26
-		li $a1, 31
+		li $a1, 30
 		lw $a2, colorBlanco
-		li $a3, 29
+		li $a3, 28
 		jal DrawHorizontalLine
 		
 		li $a0, 26
@@ -515,7 +515,7 @@ Nombres:
 		
 		#C
 		li $a0, 32
-		li $a1, 28
+		li $a1, 27
 		lw $a2, colorBlanco
 		li $a3, 34
 		jal DrawHorizontalLine
@@ -527,7 +527,7 @@ Nombres:
 		jal DrawHorizontalLine
 		
 		li $a0, 31     
-		li $a1, 29		
+		li $a1, 28		
 		lw $a2, colorBlanco	
 		li $a3, 32	
 		jal DrawVerticalLine	
@@ -905,169 +905,169 @@ Nombres:
 		li $a1, 58
 		lw $a2, colorBlanco
 		jal DrawPoint
-		
-		
-Press_1:
-		lw $t1, 0xFFFF0004		# Verifica que tecla se presionó
-		beq $t1, 0x00000031, Begin_game # presiona 1
-		
-		li $a0, 250	#
-		li $v0, 32	# Pausa for 250 milisec
-		syscall		#
-		
-		j Press_1    # Jump back to the top of the wait loop
-		
-		sw $zero, 0xFFFF0000		# Limpia el boton presionado
 
-
-Begin_game:
-
-	li $a0, 1		#Carga 1 en $a0		
-	sw $a0, Begin		#Se guarda la primera partida
-
-	# Coordenadas iniciales
-	li $t0, 1
-	sw $t0, Ptankx
-	li $t0, 31
-	sw $t0, Ptanky
-	li $t0, 50
-	sw $t0, velocidad
-	li $t0, 63
-	sw $t0, Etank1x
-	sw $t0, Etank2x
-	sw $t0, Etank3x
-	li $t0, 11
-	sw $t0, Etank1y
-	li $t0, 38
-	sw $t0, Etank2y
-	li $t0, 62
-	sw $t0, Etank3y
-	
-	DrawMap:
-		jr $ra
-		li $a0, 26      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
-
-		li $a0, 27      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
+SelectMode:
+		lw $t1, 0xFFFF0004
+		beq $t1, 0x00000031, BeginGame
 		
-		li $a0, 28      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
-			
-		li $a0, 29      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
+		li $a0, 250
+		li $v0, 32
+		syscall
+		
+		j SelectMode
+		
+BeginGame:
+		sw $zero, 0xFFFF0000
+		jal ClearBoard
+		
+		li $s0, 32
+		li $s1, 32
+		lw $s2, colorTank
+		li $s3, 0
+		jal DrawPlayer
+		
+		
+		
+# $a0 x position
+# $a1 y position
+# $a2 the color
+# $a3 direction
 
-		li $a0, 35      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
+DrawPlayer:
+	playerUp:
+		bne $a3, 0 , PlayerDown
 		
-		li $a0, 36      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
-		
-		li $a0, 37      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine	
-		
-		li $a0, 38      
-		li $a1, 120		
-		lw $a2, colorBrick	
-		li $a3, 128	
-		jal DrawVerticalLine
-		
-		li $a0, 30
-		li $a1, 120
-		lw $a2, colorBrick
-		li $a3, 34
+		addi $sp, $sp, -8
+		sw $a1, 4($sp)
+		sw $a0, 0($sp)
+		addi $a0, $a0, 1
+		addi $a3, $a0, 1
 		jal DrawHorizontalLine
 		
-		li $a0, 30
-		li $a1, 121
-		lw $a2, colorBrick
-		li $a3, 34
-		jal DrawHorizontalLine	
-
-	jal ClearBoard
-				
-DrawTank:
-	# objective: look at the direction, draw a point on the correct side, erase a point on the correct side
-	beq $a3, 0x02000000, down
-	bne $a3, 0x01000000, NoMove
-	up:
-		# erase bottom point
-   		move $t2, $a2
-   		move $t1, $a1
-   		addi $a1, $a1, 5	# the bottom point
-		lw $a2, backgroundColor
-		addi $sp, $sp, -4
-   		sw $ra, 0($sp)   	# saves $ra on stack
-		jal DrawPoint
-		lw $ra, 0($sp)		# put return back
-   		addi $sp, $sp, 4	# change stack back
-   		move $a1, $t1	# put back top y position
-   		move $a2, $t2	# put back color
-   		
-		# move top y up (as long as its not at the top)
-		beq $a1, 0, NoMove
-		addi $a1, $a1, -1
-		j Move
-	down:
-		# erase top point
-		move $t1, $a2
-		lw $a2, backgroundColor
-		addi $sp, $sp, -4
-   		sw $ra, 0($sp)   	# saves $ra on stack
-		jal DrawPoint
-		lw $ra, 0($sp)		# put return back
-   		addi $sp, $sp, 4	# change stack back
-   		move $a2, $t1	# put back color
-   		
-		# move down top y (as long as bottom is not at bottom)
-		beq $a1, 26, NoMove	# height is 31 - 5 = 26
-		addi $a1, $a1, 1
-		j Move
-	NoMove:
-		# else do nothing, make sure the direction is nothing
-		li $a3, 0
-	Move:
-		li $t0, 6
-	StartPLoop:
-		subi $t0, $t0, 1
-		addu $t1, $a1, $t0
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
 		
-		# Converts to memory address
-		sll $t1, $t1, 6   # multiply y-coordinate by 64 (length of the field)
-		addu $v0, $a0, $t1
-		sll $v0, $v0, 2
-		addu $v0, $v0, $gp
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
 		
-		sw $a2, ($v0)
-		beqz $t0, EndPLoop
-		j StartPLoop
-	EndPLoop:		
-		jr $ra
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1, 3
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		addi $sp,$sp, 8
+		
+		j EndDraw
+		
+	PlayerDown:	
+		bne $a3, 1, PlayerLeft
+		
+		addi $sp, $sp, -8
+		sw $a1, 4($sp)
+		sw $a0, 0($sp)
+		
+		addi $a0, $a0, 1
+		addi $a1, $a1, 3
+		addi $a3, $a0, 1
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		addi $sp,$sp, 8
+		
+		j EndDraw
+		
+	PlayerLeft:
+		bne $a3, 2, PlayerRight
+		
+		addi $sp, $sp, -8
+		sw $a1, 4($sp)
+		sw $a0, 0($sp)
+		
+		addi $a0, $a0, 1
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a0, $a0, 1
+		addi $a1, $a1, 3
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		addi $sp,$sp, 8
+		
+		j EndDraw
+		
+	PlayerRight:	
+		bne $a3, 3, EndDraw
+		
+		addi $sp, $sp, -8
+		sw $a1, 4($sp)
+		sw $a0, 0($sp)
+		
 
-# $a2 contains the score of the player
-# $a3 contains the column of the leftmost scoring dot.
-# Using this information, draws along the top of the screen to display a player's score			
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 0($sp)
+		lw $a1, 4($sp)
+		addi $a1, $a1, 3
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		addi $sp,$sp, 8
+			
+										
+	EndDraw: 																						
+		jr $ra	
+
 
 
 DrawPoint:
@@ -1079,7 +1079,10 @@ DrawPoint:
 		
 		jr $ra
 
-
+# $a0 the x starting coordinate
+# $a1 the y coordinate
+# $a2 the color
+# $a3 the x ending coordinate
 DrawHorizontalLine:
 		
 		addi $sp, $sp, -4
@@ -1098,42 +1101,15 @@ DrawHorizontalLine:
 		
 		lw $ra, 0($sp)		# put return back
    		addi $sp, $sp, 4
-
+   		
+   		
+   		jr $ra
 		
-		
-		
-		
-DrawElements: 
-	# Dibujar tanque
-	li $a0, 1
-	lw $a0, Ptankx		# Carga en a0 la coordenada X de jugador
-	lw $a1, Ptanky 	# Carga en a0 la coordenada Y de jugador
-	jal ObtenerCoordenadas
-	move $a0, $v0		# Copia coordenada a a0, ya que estan guardadas en v0
-	lw $a1, colorTank	# Almacena el color del jugador
-	jal DibujarPixel		# Dibuja el color en el pixel deseado
-
-	
-
-
-
-ObtenerCoordenadas:
-	lw $v0, anchoPantalla	# Obtiene el ancho de la pantalla
-	mul $v0, $v0, $a1	# Multiplica el ancho por la posicion en Y
-	add $v0, $v0, $a0	# Le suma al resultado anterior la posicion en X
-	mul $v0, $v0, 4		# Multiplica por 4 para obtener direccion
-	add $v0, $v0, $gp	# Suma un puntero de la pantalla en la coordenada
-	jr $ra			# 
-		
-
-
-DibujarPixel:
-	sw $a1, ($a0)	# Llena la coordenada con el valor especifico
-	jr $ra
 # $a0 the x coordinate
 # $a1 the y starting coordinate
 # $a2 the color
 # $a3 the y ending coordinate
+
 DrawVerticalLine:
 
 		addi $sp, $sp, -4
@@ -1154,7 +1130,83 @@ DrawVerticalLine:
    		addi $sp, $sp, 4
    		
 		jr $ra
+Begin_standby:
+		li $t0, 0x00000002
 		
+Standby:
+		blez $t0, EndStandby
+		li $a0,10
+		li $v0, 32
+		syscall
+		
+		addi $t0, $t0, -1
+		
+		lw $t1, 0xFFFF0000
+		blez $t1, Standby
+		
+		jal KeyPressed
+		sw $zero, 0xFFFF0000
+		j Standby
+		
+EndStandby:
+		j Begin_standby
+		
+
+
+KeyPressed:
+		lw $a0, 0xFFFF0004
+		
+		
+Move_Up:	
+		bne $a0, 19, Move_Down
+		move $a0, $s0
+		move $a1, $s1
+		move $a2, $s2
+		li $a3, 0
+		jal DrawPlayer
+
+		j Key_Done	
+	
+	
+	Move_Down:		
+		bne $a0, 115, Move_Left
+		move $a0, $s0
+		move $a1, $s1
+		move $a2, $s2
+		li $a3, 1
+		jal DrawPlayer
+
+		j Key_Done	
+	
+	
+	
+	Move_Left:	
+		bne $a0, 97, Move_Right
+		move $a0, $s0
+		move $a1, $s1
+		move $a2, $s2
+		li $a3, 2
+		jal DrawPlayer
+
+		j Key_Done
+
+
+
+	Move_Right:	
+		bne $a0, 100, Key_Done
+		move $a0, $s0
+		move $a1, $s1
+		move $a2, $s2
+		li $a3, 3
+		jal DrawPlayer
+		j Key_Done
+
+	Key_None:	
+
+
+
+	Key_Done:	
+		jr $ra
 
 
 ClearBoard:
