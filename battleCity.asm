@@ -1168,4 +1168,3 @@ ClearBoard:
 		j StartCLoop
 	EndCLoop:
 		jr $ra
-		
