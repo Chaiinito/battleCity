@@ -1,25 +1,45 @@
 .data
-	colorTank:	.word 0x00FFFF00
-	colorEtank1:	.word 0x00F5F5F5
-	colorEtank2:	.word 0x002E8B57
-	colorEtank3:	.word 0x00FF0000
+
 	
 	colorBullet:	.word 0x00FFFFFF
 	colorBrick:	.word 0x00FF3300
 	colorBlanco:	.word 0x00FFFFFF
+	colorSilver: 	.word 0x00D3D3D3
 	backgroundColor:.word 0x00000000
-	Begin	:	.word 0
+	Begin:		.word 0
 	velocidad: 	.word 50
 	
 	
 	Ptankx:		.word 0
 	Ptanky:		.word 31
+	playerDir:	.word 0x00000000
+	colorTank:	.word 0x00FFFF00
+	playerState: 	.word 0x00ffff00
+	
 	Etank1x:	.word 63
 	Etank1y:	.word 11
+	enemy1Dir:	.word 0x00000000
+	colorEtank1:	.word 0x00F5F5F5
+	enemy1State: 	.word 0x00ffff00
+	
 	Etank2x:	.word 63 
 	Etank2y:	.word 38
+	enemy2Dir:	.word 0x00000000	
+	colorEtank2:	.word 0x002E8B57
+	enemy2State: 	.word 0x00ffff00
+	
 	Etank3x:	.word 63
 	Etank3y:	.word 62
+	enemy3Dir:	.word 0x00000000	
+	colorEtank3:	.word 0x00FF0000
+	enemy3State: 	.word 0x00ffff00
+		
+	Etank4x:	.word 0x00000000
+	Etank4y:	.word 0x00000000
+	enemy4Dir:	.word 0x00000000	
+	colorEtank4:	.word 0x00ffff00
+	enemy4State: 	.word 0x00ffff00	
+	
 	anchoPantalla:	.word 64
 
 
@@ -936,143 +956,130 @@ SelectMode:
 BeginGame:
 		sw $zero, 0xFFFF0000
 		jal ClearBoard
+
 		
-		li $s0, 32
-		li $s1, 32
-		lw $s2, colorTank
-		li $s3, 0
-		jal DrawPlayer
+		move $a0, $s0
+		move $a1, $s1
+		move $a2, $s2
+		move $a3, $s3
+		
+		jal DrawTank
 		
 MovePlayer:
 			
 		
 		
 		
-DrawPlayer: 
-	playerUp:
+DrawTank: 
+	addi $sp, $sp, -12
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	PlayerUp:
 		bne $a3, 0 , PlayerDown
-		
-		addi $sp, $sp, -8
-		sw $a1, 4($sp)
-		sw $a0, 0($sp)
 		addi $a0, $a0, 1
 		addi $a3, $a0, 1
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1,1 
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1, 2
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1, 3
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		addi $sp,$sp, 8
 		
 		j EndDraw
 		
 	PlayerDown:	
 		bne $a3, 1, PlayerLeft
 		
-		addi $sp, $sp, -8
-		sw $a1, 4($sp)
-		sw $a0, 0($sp)
-		
 		addi $a0, $a0, 1
 		addi $a1, $a1, 3
 		addi $a3, $a0, 1
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1,1 
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1, 2
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		addi $sp,$sp, 8
 		
 		j EndDraw
 		
 	PlayerLeft:
 		bne $a3, 2, PlayerRight
 		
-		addi $sp, $sp, -8
-		sw $a1, 4($sp)
-		sw $a0, 0($sp)
-		
+
 		addi $a0, $a0, 1
 		addi $a3, $a0, 2
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1,1 
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1, 2
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a0, $a0, 1
 		addi $a1, $a1, 3
 		addi $a3, $a0, 2
 		jal DrawHorizontalLine
-		
-		addi $sp,$sp, 8
-		
+
 		j EndDraw
 		
 	PlayerRight:	
 		bne $a3, 3, EndDraw
 		
-		addi $sp, $sp, -8
-		sw $a1, 4($sp)
-		sw $a0, 0($sp)
-		
 
 		addi $a3, $a0, 2
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1,1 
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1, 2
 		addi $a3, $a0, 3
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
-		lw $a1, 4($sp)
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
 		addi $a1, $a1, 3
 		addi $a3, $a0, 2
 		jal DrawHorizontalLine
@@ -1080,9 +1087,148 @@ DrawPlayer:
 		addi $sp,$sp, 8
 			
 										
-	EndDraw: 																						
+	EndDraw: 	
+		lw $ra, 0($sp)		
+		addi $sp, $sp, 12																			
 		jr $ra						
 
+EraseTank: 
+	addi $sp, $sp, -12
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp)
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp)
+	addi $a1, $a1, 1
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp) 
+	addi $a1, $a1, 2 
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp)
+	addi $a1, $a1, 3
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+								
+	EndErase: 	
+	lw $ra, 0($sp)		
+	addi $sp, $sp, 12																			
+	jr $ra	
+
+CheckCollision:
+	addi $sp, $sp, -8
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	
+	beq $a1, $a1, CheckCol
+	addi $a1, $a1, 1
+	jal CheckCollision
+	
+	CheckCol:
+		PlayerCol:
+			bne $a0, 0, EnemyCol
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			li $a2, 4
+			lw $a3, playerDir
+			jal CollisionDirection
+			j CheckCollisionDone
+			
+			
+	EnemyCol:
+			bne $a0, 1, Enemy2Col			
+	Enemy2Col:
+			bne $a0, 2, Enemy3Col	
+	Enemy3Col:
+			bne $a0, 3, Enemy4Col	
+	Enemy4Col:
+			bne $a0, 4, CheckCollisionDone
+			
+					
+	CheckCollisionDone:						
+		lw $ra, 0($sp)
+		addi $sp, $sp, 8
+		jr $ra
+
+CollisionDirection:
+	addi $sp, $sp, 4
+	sw $ra, 0($sp)
+	CollUp:
+		bne $a3, 0, CollDown
+		Pixel0Up:
+			jal LoadColor
+			beq $v0, 0, Pixel1Up
+			li $v0, 1
+			j CollDone
+		
+		Pixel1Up:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, Pixel2Up
+			li $v0, 1
+			j CollDone
+		Pixel2Up:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, Pixel3Up
+			li $v0, 1
+			j CollDone		
+		Pixel3Up:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, NoCollUp
+			li $v0, 1
+			j CollDone		
+		
+		NoCollUp:
+			li $v0, 0
+			j CollDone
+		
+		
+		
+	CollDown:
+		bne $a3, 1,CollLeft
+
+	CollLeft:
+		bne $a3, 2, CollRight
+
+	CollRight:
+		bne $a3, 3, CollDone	
+	
+	
+	CollDone:
+	lw $ra, 0($sp) 
+	addi $sp, $sp, 4
+	jr $ra
+	
+LoadColor:
+	sll $t0, $a1, 6
+	addu $v0, $a0, $t0
+	sll $v0, $v0, 2
+	addu $v0, $v0, $gp
+	lw $v0, 0($v0)
+	jr $ra
+		
+	
+	
+	
 DrawPoint: 
 		sll $t0,$a1,6
 		addu $v0, $a0, $t0
@@ -1135,13 +1281,92 @@ DrawVerticalLine:
 		addi $sp, $sp, 4
 		
 		jr $ra
+DrawGame:
+	
+	li $a0, 0
+	li $a1, 0
+	lw $a2, colorBrick
+	li $a3, 63
+	jal DrawHorizontalLine
+	
+	li $a0, 0
+	li $a1, 63
+	lw $a2, colorBrick
+	li $a3, 63
+	jal DrawHorizontalLine
+	
+	li $a0, 53
+	li $a1, 0		
+	lw $a2, colorBrick	
+	li $a3, 63	
+	jal DrawVerticalLine	
+	
+	li $a0, 54
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 55
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 56 
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 57 
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 58 
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 59 
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 60
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 61
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 62
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 63
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
 
-
+	
 Begin_standby:
 		li $t0, 0x00000002
 		
 Standby:
-		blez $t0, EndStanby
+		blez $t0, EndStandby
 		li $a0,10
 		li $v0, 32
 		syscall
@@ -1161,27 +1386,26 @@ EndStandby:
 
 
 KeyPressed:
+
+		addi $sp, $sp, -4
+		sw $ra, 0($sp)
 		lw $a0, 0xFFFF0004
 	
 	
 	Move_Up:	
-		bne $a0, Move_Down
-		move $a0, $s0
-		move $a1, $s1
-		move $a2, $s2
-		li $a3, 0
-		jal DrawPlayer
+		bne $a0, 119 ,Move_Down
+		li $a0, 0
+		li $a1, 0
+		jal MoveAgent
 
 		j Key_Done	
 	
 	
 	Move_Down:		
 		bne $a0, 115, Move_Left
-		move $a0, $s0
-		move $a1, $s1
-		move $a2, $s2
-		li $a3, 1
-		jal DrawPlayer
+		li $a0, 0
+		li $a1, 1
+		jal MoveAgent
 
 		j Key_Done	
 	
@@ -1189,11 +1413,9 @@ KeyPressed:
 	
 	Move_Left:	
 		bne $a0, 97, Move_Right
-		move $a0, $s0
-		move $a1, $s1
-		move $a2, $s2
-		li $a3, 2
-		jal DrawPlayer
+		li $a0, 0
+		li $a1, 2
+		jal MoveAgent
 
 		j Key_Done
 
@@ -1201,16 +1423,162 @@ KeyPressed:
 
 	Move_Right:	
 		bne $a0, 100, Key_Done
-		move $a0, $s0
-		move $a1, $s1
-		move $a2, $s2
-		li $a3, 3
-		jal DrawPlayer
+		li $a0, 0
+		li $a1, 3
+		jal MoveAgent
 		j Key_Done
 
 	Key_None:	
 
 
 
-	Key_Done:	
+	Key_Done:
+		
+		lw $ra, 0($sp)	
+		addi $sp, $sp, -4
 		jr $ra
+
+
+
+MoveAgent:
+	addi $sp, $sp, -12
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	MoveAgentPlayer:
+		bne $a0, 0, MoveAgentEnemy1
+		lw $t1, playerDir
+		beq $a1, $t1, AdvanceTank
+		lw $a0, Ptankx
+		lw $a1, Ptanky
+		jal EraseTank
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		move $a3, $a1 
+		sw $a3, playerDir
+		lw $a0, Ptankx
+		lw $a1, Ptanky
+		lw $a2, playerState
+		
+		jal DrawTank
+	
+		AdvanceTank:
+			j MoveAgentDone
+	
+	
+	MoveAgentEnemy1:
+		bne $a0, 1, MoveAgentEnemy2
+		
+	
+	MoveAgentEnemy2:
+		bne $a0, 2, MoveAgentEnemy3
+			
+	MoveAgentEnemy3:
+		bne $a0, 3, MoveAgentEnemy4		
+						
+	MoveAgentEnemy4:
+		bne $a0, 4, MoveAgentDone
+		
+		
+	MoveAgentDone:	
+	lw $ra, 0($sp)
+	addi $sp, $sp, 12
+	
+	
+	
+TryMoveAgent:
+			
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	
+	TryMoveAgentPlayer:
+		bne $a0, 0, MoveAgentEnemy1
+		lw $t0, playerDir
+		
+		PlayerMoveUp:	
+			bne $t0, 0, PlayerMoveDown
+			
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			jal EraseTank
+			
+			lw $t1, Ptanky
+			addi $t1, $t1, -1
+			sw $t1, Ptanky
+				
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			lw $a2, playerState
+			lw $a3, playerDir
+			jal DrawTank
+			j TryMoveAgentDone
+
+		PlayerMoveDown:
+			bne $t0, 1, PlayerMoveLeft
+			
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			jal EraseTank
+			
+			lw $t1, Ptanky
+			addi $t1, $t1, 1
+			sw $t1, Ptanky
+				
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			lw $a2, playerState
+			lw $a3, playerDir
+			jal DrawTank
+			j TryMoveAgentDone
+			
+		PlayerMoveLeft:
+			bne $t0, 2, PlayerMoveRight
+			
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			jal EraseTank
+			
+			lw $t1, Ptanky
+			addi $t1, $t1, -1
+			sw $t1, Ptanky
+				
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			lw $a2, playerState
+			lw $a3, playerDir
+			jal DrawTank
+			j TryMoveAgentDone
+						
+		PlayerMoveRight:
+			bne $t0, 3, TryMoveAgentDone
+						
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			jal EraseTank
+			
+			lw $t1, Ptanky
+			addi $t1, $t1, 1
+			sw $t1, Ptanky
+				
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			lw $a2, playerState
+			lw $a3, playerDir
+			jal DrawTank
+			j TryMoveAgentDone
+	TryMoveAgentEnemy1:
+		bne $a0, 1, TryMoveAgentEnemy2
+
+	TryMoveAgentEnemy2:
+		bne $a0, 2, TryMoveAgentEnemy3
+	TryMoveAgentEnemy3:
+		bne $a0, 3, TryMoveAgentEnemy4
+	TryMoveAgentEnemy4:
+		bne $a0, 4, TryMoveAgentDone
+
+
+
+
+	TryMoveAgentDone:
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4
