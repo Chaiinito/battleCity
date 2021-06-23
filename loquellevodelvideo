@@ -5,6 +5,7 @@
 	colorBrick:	.word 0x00DD571C
 	colorBlanco:	.word 0x00FFFFFF
 	colorSilver: 	.word 0x00D3D3D3
+	colorGreen	.word 0x00008000
 	backgroundColor:.word 0x00000000
 	Begin:		.word 0
 	velocidad: 	.word 50
@@ -973,6 +974,66 @@ DrawOrangeBlock:
 	addi $sp, $sp, 4		
 		
 	jr $ra
+	
+	
+DrawGreenBlock:
+
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+		
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4		
+		
+	jr $ra
+	
+DrawSylverBlock:
+
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+		
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4		
+		
+	jr $ra	
+			
 Map1: 
 	addi $sp, $sp, -4
 	sw $ra, 0($sp)
@@ -1024,13 +1085,13 @@ Map1:
 	
 	li $a0, 23
 	li $a1, 56 
-	li $a2, colorBrick
+	lw $a2, colorBrick
 	addi $a3, $a0, 8
 	jal DrawHorizontalLine
 	
 	li $a0, 23
 	li $a1, 55
-	li $a2, colorBrick
+	lw $a2, colorBrick
 	addi $a3, $a0, 8
 	jal DrawHorizontalLine
 	
@@ -1046,6 +1107,7 @@ Map1:
 	li $a3, 62
 	jal DrawVerticalLine
 	
+	
 	li $a0, 37
 	li $a1, 55
 	jal DrawOrangeBlock
@@ -1062,21 +1124,41 @@ Map1:
 	li $a1, 43
 	jal DrawOrangeBlock
 	
-	li $a0, 42
+	
+	li $a0, 37
 	li $a1, 55
 	jal DrawOrangeBlock
 	
-	li $a0, 42
+	li $a0, 37
 	li $a1, 51
 	jal DrawOrangeBlock
 	
-	li $a0, 42
+	li $a0, 37
 	li $a1, 47
 	jal DrawOrangeBlock
 	
-	li $a0, 42
+	li $a0, 37
 	li $a1, 43
 	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 55
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 51
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 47
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 43
+	jal DrawOrangeBlock
+	
+	
+	
 	
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4	
@@ -1526,6 +1608,12 @@ DrawFrames:
 	jal DrawHorizontalLine
 	
 	li $a0, 54
+	li $a1, 0		
+	lw $a2, colorSilver	
+	li $a3, 63	
+	jal DrawVerticalLine
+	
+	li $a0, 53
 	li $a1, 0		
 	lw $a2, colorBrick	
 	li $a3, 63	
