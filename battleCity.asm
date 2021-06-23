@@ -920,10 +920,10 @@ BeginGame:
 		sw $zero, 0xFFFF0000
 		jal ClearBoard
 		
-		li $s0, 32
-		li $s1, 32
-		lw $s2, colorTank
-		li $s3, 0
+		li $a0, 32
+		li $a1, 32
+		lw $a2, colorTank
+		li $a3, 0
 		jal DrawPlayer
 		
 		
@@ -934,17 +934,19 @@ BeginGame:
 # $a3 direction
 
 DrawPlayer:
-	playerUp:
+	PlayerUp:
 		bne $a3, 0 , PlayerDown
 		
 		addi $sp, $sp, -8
-		sw $a1, 4($sp)
+		sw $a1, 4($sp)# se guardan en el stack
 		sw $a0, 0($sp)
-		addi $a0, $a0, 1
-		addi $a3, $a0, 1
+		addi $a0, $a0, 1 # offset a la derecha
+		#Para la primera linea la coordenada y no cambia
+		
+		addi $a3, $a0, 1 # 
 		jal DrawHorizontalLine
 		
-		lw $a0, 0($sp)
+		lw $a0, 0($sp) #recupera el valor original de X
 		lw $a1, 4($sp)
 		addi $a1, $a1,1 
 		addi $a3, $a0, 3
@@ -1207,7 +1209,7 @@ Move_Up:
 
 	Key_Done:	
 		jr $ra
-
+ 
 
 ClearBoard:
 		lw $t0, backgroundColor
