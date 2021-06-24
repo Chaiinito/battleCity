@@ -5,41 +5,48 @@
 	colorBrick:	.word 0x00DD571C
 	colorBlanco:	.word 0x00FFFFFF
 	colorSilver: 	.word 0x00D3D3D3
-	colorGreen	.word 0x00008000
+	colorGreen:	.word 0x00008000
 	backgroundColor:.word 0x00000000
 	Begin:		.word 0
 	velocidad: 	.word 50
 	
-	
+	#jugador
 	Ptankx:		.word 18
 	Ptanky:		.word 59
 	playerDir:	.word 0x00000000
 	colorTank:	.word 0x00FFFF00
 	playerState: 	.word 0x00ffff00
-	
+	#tanque enemigo #1
 	Etank1x:	.word 63
 	Etank1y:	.word 11
 	enemy1Dir:	.word 0x00000000
 	colorEtank1:	.word 0x00F5F5F5
 	enemy1State: 	.word 0x00ffff00
-	
+	#tanque enemigo #2
 	Etank2x:	.word 63 
 	Etank2y:	.word 38
 	enemy2Dir:	.word 0x00000000	
 	colorEtank2:	.word 0x002E8B57
 	enemy2State: 	.word 0x00ffff00
-	
+	#tanque enemigo #3
 	Etank3x:	.word 63
 	Etank3y:	.word 62
 	enemy3Dir:	.word 0x00000000	
 	colorEtank3:	.word 0x00FF0000
 	enemy3State: 	.word 0x00ffff00
-		
+	#tanque enemigo #4
 	Etank4x:	.word 0x00000000
 	Etank4y:	.word 0x00000000
 	enemy4Dir:	.word 0x00000000	
 	colorEtank4:	.word 0x00ffff00
 	enemy4State: 	.word 0x00ffff00	
+	#bala jugador
+	playerBulletActive:	.word 0
+	playerBulletPosX:	.word 0
+	playerBulletPosY:	.word 0
+	playerBulletDir:	.word 0
+	
+	
 	
 	anchoPantalla:	.word 64
 	map:		.word 1
@@ -47,8 +54,6 @@
 
 
 .text
-
-
 
 NewGame:
 	jal ClearBoard
@@ -1005,7 +1010,7 @@ DrawGreenBlock:
 		
 	jr $ra
 	
-DrawSylverBlock:
+DrawSilverBlock:
 
 	addi $sp, $sp, -4
 	sw $ra, 0($sp)
@@ -1053,6 +1058,47 @@ Map1:
 	li $a0, 6
 	li $a1, 43
 	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 5
+	jal DrawOrangeBlock
+
+	li $a0, 6
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1 21
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 5
+	jal DrawOrangeBlock
+
+	li $a0, 14
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1 21
+	jal DrawOrangeBlock
+	
 	
 	li $a0, 14
 	li $a1, 55
@@ -1123,23 +1169,91 @@ Map1:
 	li $a0, 37
 	li $a1, 43
 	jal DrawOrangeBlock
-	
+	#
 	
 	li $a0, 37
-	li $a1, 55
+	li $a1, 5
 	jal DrawOrangeBlock
 	
 	li $a0, 37
-	li $a1, 51
+	li $a1, 9
 	jal DrawOrangeBlock
 	
 	li $a0, 37
-	li $a1, 47
+	li $a1, 13
 	jal DrawOrangeBlock
 	
 	li $a0, 37
-	li $a1, 43
+	li $a1, 17
 	jal DrawOrangeBlock
+	#
+	
+	#
+	
+	li $a0, 29
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 29
+	jal DrawOrangeBlock
+	#
+	
+	#
+	
+	li $a0, 21
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 29
+	jal DrawOrangeBlock
+	#
+	li $a0, 21
+	li $a1, 17
+	jal DrawSilverBlock
+	#
+	
+	li $a0, 45
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 17
+	jal DrawOrangeBlock
+	#
 	
 	li $a0, 45
 	li $a1, 55
@@ -1157,8 +1271,33 @@ Map1:
 	li $a1, 43
 	jal DrawOrangeBlock
 	
+	li $a0, 2
+	li $a1, 35
+	jal DrawSilverBlock
 	
+	li $a0, 10
+	li $a1, 35
+	jal DrawOrangeBlock
 	
+	li $a0, 14
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 49
+	li $a1, 35
+	jal DrawOrangeBlock
+		
+	li $a0, 37
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 41
+	li $a1, 35
+	jal DrawOrangeBlock
 	
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4	
@@ -1689,8 +1828,15 @@ DrawMap:
 				
 	DrawMap2:
 		
-			
+DrawObjects: 	
+
+	lw $t0, playerBulletActive
+	beq $t0, 0, continue
+	
 					
+	
+	continue:				
+													
 Begin_standby:
 		li $t0, 0x00000002
 		
@@ -1710,7 +1856,7 @@ Standby:
 		j Standby
 		
 EndStandby:
-		j Begin_standby
+		j DrawObjects
 		
 
 
@@ -1756,6 +1902,18 @@ KeyPressed:
 		li $a1, 3
 		jal MoveAgent
 		j Key_Done
+		
+	Key_Shoot:	
+		bne $a0, 32, Key_Done
+		li $t0, 1
+		sw $t0, playerBulletActive
+		lw $t0, Ptankx
+		sw $t0, playerBulletPosX
+		lw $t0, Ptanky
+		sw $t0, playerBulletPosY
+		lw $t0, playerDir
+		sw $t0, playerBulletDir
+		j Key_Done	
 
 	Key_None:	
 
@@ -1806,9 +1964,11 @@ MoveAgent:
 		bne $a0, 3, MoveAgentEnemy4		
 						
 	MoveAgentEnemy4:
-		bne $a0, 4, MoveAgentDone
+		bne $a0, 4, MoveAgentPlayerBullet
 		
-		
+	MoveAgentPlayerBullet:
+		bne $a0, 5, MoveAgentDone
+			
 	MoveAgentDone:	
 	lw $ra, 0($sp)
 	addi $sp, $sp, 12
