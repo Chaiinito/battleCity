@@ -11,6 +11,7 @@
 	backgroundColor:.word 0x00000000
 	Begin:		.word 0
 	velocidad: 	.word 50
+	agent:		.word 0x00000000
 	
 	#jugador
 	Ptankx:		.word 18
@@ -2007,19 +2008,251 @@ MoveBullets:
 			addi $a3, $a0, 1
 			jal DrawHorizontalLine
 			
+			
 			addi $s2, $s2, -1
 			sw $s2, playerBulletPosY
-			move $a0, $s1
-			move $a1, $s2
-			lw $a3, colorWhite
-			jal DrawHorizontalLine
+			
+			checkOrangeColUpLeft:
+				move $a0, $s1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorBrick
+				bne $v0, $v0, checkOrangeColUpRight
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorBlack
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+		
+			checkOrangeColUpRight:
+				addi $a0, $s1, 1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorBrick
+				bne $v0, $v0, checkSilverColUpLeft
+				addi $a0, $s1, 1
+				move $a1, $s2
+				lw $a2, colorBlack
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				j doneMoveBullet
+			
+			checkSilverColUpLeft:
+				move $a0, $s1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorSilver
+				bne $v0, $v0, checkSilverColUpRight
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorSilver
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				
+				
+			checkSilverColUpRight:
+				addi $a0, $s1, 1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorSilver
+				bne $v0, $v0, bulletUp
+				addi $a0, $s1, 1
+				move $a1, $s2
+				lw $a2, colorSilver
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				j doneMoveBullet
+				
 			j doneMoveBullet
+			
+			bulletUp:
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorWhite
+				addi $a3, $a0, 1
+				jal DrawHorizontalLine
+				j doneMoveBullet
 			 
 		moveBulletDown:
-			bne $s0, 0, moveBulletLeft
+			bne $s0, 1, moveBulletLeft
+			lw $s1, playerBulletPosX
+			lw $s2, playerBulletPosY
+			
+			move $a0, $s1
+			move $a1, $s2
+			lw $a2, colorBlack
+			addi $a3, $a0, 1
+			jal DrawHorizontalLine
+			
+			
+			addi $s2, $s2, 1
+			sw $s2, playerBulletPosY
+			
+			
+			checkOrangeColDownLeft:
+				move $a0, $s1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorBrick
+				bne $v0, $v0, checkOrangeColDownRight
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorBlack
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+
+				
+				
+			checkOrangeColDownRight:
+				addi $a0, $s1, 1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorBrick
+				bne $v0, $v0, checkSilverColDownLeft
+				addi $a0, $s1, 1
+				move $a1, $s2
+				lw $a2, colorBlack
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				j doneMoveBullet
+			
+			checkSilverColDownLeft:
+				move $a0, $s1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorSilver
+				bne $v0, $v0, checkSilverColDownRight
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorSilver
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				
+				
+			checkSilverColDownRight:
+				addi $a0, $s1, 1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorSilver
+				bne $v0, $v0, bulletDown
+				addi $a0, $s1, 1
+				move $a1, $s2
+				lw $a2, colorSilver
+				move $a3, $a0
+				jal DrawHorizontalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				j doneMoveBullet
+
+			j doneMoveBullet
+			
+			bulletDown:
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorWhite
+				addi $a3, $a0, 1
+				jal DrawHorizontalLine
+				j doneMoveBullet
 			
 		moveBulletLeft:
-			bne $s0, 0, moveBulletRight
+			bne $s0, 2, moveBulletRight
+			lw $s1, playerBulletPosX
+			lw $s2, playerBulletPosY
+			
+			move $a0, $s1
+			move $a1, $s2
+			lw $a2, colorBlack
+			addi $a3, $a1, 1
+			jal DrawVerticalLine
+			
+			
+			addi $s1, $s1, -1
+			sw $s1, playerBulletPosX
+			
+			
+			checkOrangeColLeftUp:
+				move $a0, $s1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorBrick
+				bne $v0, $v0, checkOrangeColLeftDown
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorBlack
+				move $a3, $a1
+				jal DrawVerticallLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				
+			checkOrangeColLeftDown:
+				
+				move $a0, $s1
+				add $a1, $s2, 1 
+				jal LoadColor
+				lw $t0, colorBrick
+				bne $v0, $v0, checkSilverColLeftUp
+				addi $a0, $s1, 1
+				move $a1, $s2
+				lw $a2, colorBlack
+				move $a3, $a1
+				jal DrawVerticalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				j doneMoveBullet
+			
+			checkSilverColLeftUp:
+				move $a0, $s1
+				move $a1, $s2
+				jal LoadColor
+				lw $t0, colorSilver
+				bne $v0, $v0, checkSilverColLeftDown
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorSilver
+				move $a3, $a1
+				jal DrawVerticalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				
+				
+			checkSilverColDownRight:
+				move $a0, $s1
+				add $a1, $s2, 1 
+				jal LoadColor
+				lw $t0, colorSilver
+				bne $v0, $v0, bulletLeft
+				addi $a0, $s1, 1
+				move $a1, $s2
+				lw $a2, colorSilver
+				move $a3, $a1
+				jal DrawVerticalLine
+				li $t0, 0
+				sw $t0, playerBulletActive
+				j doneMoveBullet
+
+			j doneMoveBullet
+			
+			bulletLeft:
+				move $a0, $s1
+				move $a1, $s2
+				lw $a2, colorWhite
+				addi $a3, $a0, 1
+				jal DrawHorizontalLine
+				j doneMoveBullet
 			
 		moveBulletRight:
 			bne $s0, 0, doneMoveBullet
@@ -2028,7 +2261,24 @@ MoveBullets:
 	
 			
 	doneMoveBullet:
-																
+		
+		lw $ra, 0($sp)
+		addi $sp, $sp, 4
+		jr $ra
+#$a0 x
+#$a1 y
+#$a3 dir														
+CheckBulletCollision:
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	bulletCollUp:
+		bne $a2, 0, bulletCollDown
+		
+	bulletCollDown:
+		bne $a2, 0, bulletCollLeft	
+	bulletCollLeft:
+																																																																
+																																																																
 
 MoveAgent:
 	addi $sp, $sp, -12
