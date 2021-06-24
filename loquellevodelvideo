@@ -3,7 +3,9 @@
 	
 	colorBullet:	.word 0x00FFFFFF
 	colorBrick:	.word 0x00DD571C
+	colorBlack:	.word 0x00000000
 	colorBlanco:	.word 0x00FFFFFF
+	colorWhite:	.word 0x00FFFFFF
 	colorSilver: 	.word 0x00D3D3D3
 	colorGreen:	.word 0x00008000
 	backgroundColor:.word 0x00000000
@@ -1830,15 +1832,18 @@ DrawMap:
 		
 DrawObjects: 	
 
-	lw $t0, playerBulletActive
-	beq $t0, 0, continue
+	jal MoveBullets
 	
+	
+	#bloqueVerde
+	li $a0, 30
+	li $a1, 32
+	jal DrawGreenBlock
 					
-	
-	continue:				
-													
+				
+# esperar y leer los botones													
 Begin_standby:
-		li $t0, 0x00000002
+		li $t0, 0x00000002 
 		
 Standby:
 		blez $t0, EndStandby
@@ -1907,12 +1912,72 @@ KeyPressed:
 		bne $a0, 32, Key_Done
 		li $t0, 1
 		sw $t0, playerBulletActive
-		lw $t0, Ptankx
-		sw $t0, playerBulletPosX
-		lw $t0, Ptanky
-		sw $t0, playerBulletPosY
 		lw $t0, playerDir
 		sw $t0, playerBulletDir
+		
+		bulletUpDir:
+			bne $t0, 0, bulletDownDir
+			lw $t1, Ptankx
+			addi $t1, $t1, 1
+			sw $t0, playerBulletPosX
+			move $a0, $t1
+			lw $t0, Ptanky
+			addi $t1, $t1, -1
+			sw $t1, playerBulletPosY
+			move $a1, $t1,
+			lw $a2, colorWhite
+			addi $a3, $a0, 1
+			jal DrawHorizontalLine 
+			
+			j Key_Done
+			
+		bulletDownDir:
+			bne $t0, 1, bulletLeftDir
+			lw $t1, Ptankx
+			addi $t1, $t1, 1
+			sw $t0, playerBulletPosX
+			move $a0,$t1 
+			lw $t0, Ptanky
+			addi $t1, $t1, 4
+			sw $t0, playerBulletPosY
+			move $a1, $t1
+			lw $a2, colorWhite
+			addi $a3, $a0, 1
+			jal DrawHorizontalLine 
+			
+			j Key_Done
+			
+		bulletLeftDir:
+			bne $t0, 2, bulletRightDir
+			lw $t1, Ptankx
+			addi $t1, $t1, -1
+			sw $t0, playerBulletPosX
+			move $a0, $t1,
+			lw $t0, Ptanky
+			addi $t1, $t1, 1
+			sw $t0, playerBulletPosY
+			move $a0, $t1
+			lw $a2, colorWhite
+			addi $a3, $a1, 1
+			jal DrawVerticalLine
+				
+			j Key_Done
+			
+		bulletRightDir:
+			bne $t0, 3, bulletRightDir
+			lw $t1, Ptankx
+			addi $t1, $t1, 4
+			sw $t0, playerBulletPosX
+			move $a0, $t1
+			lw $t0, Ptanky
+			addi $t1, $t1, 1
+			sw $t0, playerBulletPosY
+			move $a1, $t1	
+			lw $a2, colorWhite
+			addi $a3, $a1, 1
+			jal DrawVerticalLine
+			j Key_Done	
+			
 		j Key_Done	
 
 	Key_None:	
@@ -1924,8 +1989,46 @@ KeyPressed:
 		lw $ra, 0($sp)	
 		addi $sp, $sp, -4
 		jr $ra
-
-
+MoveBullets:
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	movePlayerBullet:
+		lw $t0 playerBulletDir
+		bne $s0, 1, moveEnemyBullet
+		lw $s0 playerBulletDir
+		moveBulletUp:
+			bne $t0, 0, moveBulletDown
+			lw $s1, playerBulletPosX
+			lw $s2, playerBulletPosY
+			
+			move $a0, $s1
+			move $a1, $s2
+			lw $a2, colorBlack
+			addi $a3, $a0, 1
+			jal DrawHorizontalLine
+			
+			addi $s2, $s2, -1
+			sw $s2, playerBulletPosY
+			move $a0, $s1
+			move $a1, $s2
+			lw $a3, colorWhite
+			jal DrawHorizontalLine
+			j doneMoveBullet
+			 
+		moveBulletDown:
+			bne $s0, 0, moveBulletLeft
+			
+		moveBulletLeft:
+			bne $s0, 0, moveBulletRight
+			
+		moveBulletRight:
+			bne $s0, 0, doneMoveBullet
+			
+	moveEnemyBullet:
+	
+			
+	doneMoveBullet:
+																
 
 MoveAgent:
 	addi $sp, $sp, -12
