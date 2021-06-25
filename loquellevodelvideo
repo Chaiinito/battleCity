@@ -1,6 +1,4 @@
 .data
-
-	
 	colorBullet:	.word 0x00FFFFFF
 	colorBrick:	.word 0x00DD571C
 	colorBlack:	.word 0x00000000
@@ -938,376 +936,6 @@ Nombres:
 		li $a1, 58
 		lw $a2, colorBlanco
 		jal DrawPoint	
-	
-
-#Hace el fondo de la pantalla negra
-ClearBoard: 
-		lw $t0, backgroundColor
-		li $t1, 16368 #numero de pixeles en la pantalla
-	StartCLoop:
-		subi $t1, $t1, 4
-		addu $t2, $t1, $gp
-		sw $t0, ($t2)
-		beqz $t1, EndCLoop
-		j StartCLoop
-	EndCLoop: 
-		jr $ra
-#$a0 posX
-#$a1 posY
-DrawOrangeBlock:
-
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-		
-	lw $a2, colorBrick
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorBrick
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorBrick
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorBrick
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4		
-		
-	jr $ra
-	
-	
-DrawGreenBlock:
-
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-		
-	lw $a2, colorGreen
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorGreen
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorGreen
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorGreen
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4		
-		
-	jr $ra
-	
-DrawSilverBlock:
-
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-		
-	lw $a2, colorSilver
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorSilver
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorSilver
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	addi $a1, $a1, 1
-	lw $a2, colorSilver
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-		
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4		
-		
-	jr $ra	
-			
-Map1: 
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	
-	li $a0, 6
-	li $a1, 55
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1, 51
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1, 47
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1, 43
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1, 5
-	jal DrawOrangeBlock
-
-	li $a0, 6
-	li $a1, 9
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1, 17
-	jal DrawOrangeBlock
-	
-	li $a0, 6
-	li $a1 21
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 5
-	jal DrawOrangeBlock
-
-	li $a0, 14
-	li $a1, 9
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 17
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1 21
-	jal DrawOrangeBlock
-	
-	
-	li $a0, 14
-	li $a1, 55
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 51
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 47
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 43
-	jal DrawOrangeBlock
-	
-	
-	li $a0, 23
-	li $a1, 57
-	lw $a2, colorBrick
-	li $a3, 62
-	jal DrawVerticalLine
-	
-	li $a0, 24
-	li $a1, 57
-	lw $a2, colorBrick
-	li $a3, 62
-	jal DrawVerticalLine
-	
-	li $a0, 23
-	li $a1, 56 
-	lw $a2, colorBrick
-	addi $a3, $a0, 8
-	jal DrawHorizontalLine
-	
-	li $a0, 23
-	li $a1, 55
-	lw $a2, colorBrick
-	addi $a3, $a0, 8
-	jal DrawHorizontalLine
-	
-	li $a0, 30
-	li $a1, 57
-	lw $a2, colorBrick
-	li $a3, 62
-	jal DrawVerticalLine
-	
-	li $a0, 31
-	li $a1, 57
-	lw $a2, colorBrick
-	li $a3, 62
-	jal DrawVerticalLine
-	
-	
-	li $a0, 37
-	li $a1, 55
-	jal DrawOrangeBlock
-	
-	li $a0, 37
-	li $a1, 51
-	jal DrawOrangeBlock
-	
-	li $a0, 37
-	li $a1, 47
-	jal DrawOrangeBlock
-	
-	li $a0, 37
-	li $a1, 43
-	jal DrawOrangeBlock
-	#
-	
-	li $a0, 37
-	li $a1, 5
-	jal DrawOrangeBlock
-	
-	li $a0, 37
-	li $a1, 9
-	jal DrawOrangeBlock
-	
-	li $a0, 37
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 37
-	li $a1, 17
-	jal DrawOrangeBlock
-	#
-	
-	#
-	
-	li $a0, 29
-	li $a1, 5
-	jal DrawOrangeBlock
-	
-	li $a0, 29
-	li $a1, 9
-	jal DrawOrangeBlock
-	
-	li $a0, 29
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 29
-	li $a1, 17
-	jal DrawOrangeBlock
-	
-	li $a0, 29
-	li $a1, 29
-	jal DrawOrangeBlock
-	#
-	
-	#
-	
-	li $a0, 21
-	li $a1, 5
-	jal DrawOrangeBlock
-	
-	li $a0, 21
-	li $a1, 9
-	jal DrawOrangeBlock
-	
-	li $a0, 21
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 21
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 21
-	li $a1, 29
-	jal DrawOrangeBlock
-	#
-	li $a0, 21
-	li $a1, 17
-	jal DrawSilverBlock
-	#
-	
-	li $a0, 45
-	li $a1, 5
-	jal DrawOrangeBlock
-	
-	li $a0, 45
-	li $a1, 9
-	jal DrawOrangeBlock
-	
-	li $a0, 45
-	li $a1, 13
-	jal DrawOrangeBlock
-	
-	li $a0, 45
-	li $a1, 17
-	jal DrawOrangeBlock
-	#
-	
-	li $a0, 45
-	li $a1, 55
-	jal DrawOrangeBlock
-	
-	li $a0, 45
-	li $a1, 51
-	jal DrawOrangeBlock
-	
-	li $a0, 45
-	li $a1, 47
-	jal DrawOrangeBlock
-	
-	li $a0, 45
-	li $a1, 43
-	jal DrawOrangeBlock
-	
-	li $a0, 2
-	li $a1, 35
-	jal DrawSilverBlock
-	
-	li $a0, 10
-	li $a1, 35
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 35
-	jal DrawOrangeBlock
-	
-	li $a0, 49
-	li $a1, 35
-	jal DrawOrangeBlock
-		
-	li $a0, 37
-	li $a1, 35
-	jal DrawOrangeBlock
-	
-	li $a0, 14
-	li $a1, 35
-	jal DrawOrangeBlock
-	
-	li $a0, 41
-	li $a1, 35
-	jal DrawOrangeBlock
-	
-	lw $ra, 0($sp)
-	addi $sp, $sp, 4	
-	
-			
-	jr $ra
-		
 SelectMode:
 		lw $t1, 0xFFFF0004
 		beq $t1, 0x00000031, BeginGame
@@ -1323,429 +951,23 @@ BeginGame:
 		jal ClearBoard
 
 		
-		move $a0, $s0
-		move $a1, $s1
-		move $a2, $s2
-		move $a3, $s3
+		#move $a0, $s0
+		#move $a1, $s1
+		#move $a2, $s2
+		#move $a3, $s3
 		
-		jal DrawTank
-		
-MovePlayer:
-			
-		
-		
-		
-DrawTank: 
-	addi $sp, $sp, -12
-	sw $ra, 0($sp)
-	sw $a0, 4($sp)
-	sw $a1, 8($sp)
-	PlayerUp:
-		bne $a3, 0 , PlayerDown
-		addi $a0, $a0, 1
-		addi $a3, $a0, 1
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1,1 
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1, 2
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1, 3
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		
-		j EndDraw
-		
-	PlayerDown:	
-		bne $a3, 1, PlayerLeft
-		
-		addi $a0, $a0, 1
-		addi $a1, $a1, 3
-		addi $a3, $a0, 1
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1,1 
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1, 2
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		
-		j EndDraw
-		
-	PlayerLeft:
-		bne $a3, 2, PlayerRight
-		
-
-		addi $a0, $a0, 1
-		addi $a3, $a0, 2
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1,1 
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1, 2
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a0, $a0, 1
-		addi $a1, $a1, 3
-		addi $a3, $a0, 2
-		jal DrawHorizontalLine
-
-		j EndDraw
-		
-	PlayerRight:	
-		bne $a3, 3, EndDraw
-		
-
-		addi $a3, $a0, 2
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1,1 
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1, 2
-		addi $a3, $a0, 3
-		jal DrawHorizontalLine
-		
-		lw $a0, 4($sp)
-		lw $a1, 8($sp)
-		addi $a1, $a1, 3
-		addi $a3, $a0, 2
-		jal DrawHorizontalLine
-		
-		addi $sp,$sp, 8
-			
-										
-	EndDraw: 	
-		lw $ra, 0($sp)		
-		addi $sp, $sp, 12																			
-		jr $ra						
-
-EraseTank: 
-	addi $sp, $sp, -12
-	sw $ra, 0($sp)
-	sw $a0, 4($sp)
-	sw $a1, 8($sp)
-	
-	lw $a0, 4($sp)
-	lw $a0, 8($sp)
-	li $a2, 0
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-	
-	lw $a0, 4($sp)
-	lw $a0, 8($sp)
-	addi $a1, $a1, 1
-	li $a2, 0
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-	
-	lw $a0, 4($sp)
-	lw $a0, 8($sp) 
-	addi $a1, $a1, 2 
-	li $a2, 0
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-	
-	lw $a0, 4($sp)
-	lw $a0, 8($sp)
-	addi $a1, $a1, 3
-	li $a2, 0
-	addi $a3, $a0, 3
-	jal DrawHorizontalLine
-	
-								
-	EndErase: 	
-	lw $ra, 0($sp)		
-	addi $sp, $sp, 12																			
-	jr $ra	
-
-CheckCollision:
-	addi $sp, $sp, -12
-	sw $ra, 0($sp)
-	sw $a0, 4($sp)
-	sw $a1, 8($sp)
-	
-	beq $a1, $a1, CheckCol
-	addi $a1, $a1, 1
-	jal CheckCollision
-	
-	CheckCol:
-		PlayerCol:
-			bne $a0, 0, EnemyCol
-			lw $a0, Ptankx
-			lw $a1, Ptanky
-			li $a2, 4
-			lw $a3, playerDir
-			jal CollisionDirection
-			j CheckCollisionDone
-			
-			
-	EnemyCol:
-			bne $a0, 1, Enemy2Col			
-	Enemy2Col:
-			bne $a0, 2, Enemy3Col	
-	Enemy3Col:
-			bne $a0, 3, Enemy4Col	
-	Enemy4Col:
-			bne $a0, 4, CheckCollisionDone
-			
-					
-	CheckCollisionDone:						
-		lw $ra, 0($sp)
-		addi $sp, $sp, 12
-		jr $ra
-
-CollisionDirection:
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	CollUp:
-		bne $a3, 0, CollDown
-		addi $a0, $a1, -1
-		Pixel0Up:
-			jal LoadColor
-			beq $v0, 0, Pixel1Up
-			li $v0, 1
-			j CollDone
-		
-		Pixel1Up:
-			addi $a0, $a0, 1
-			jal LoadColor
-			beq $v0, 0, Pixel2Up
-			li $v0, 1
-			j CollDone
-		Pixel2Up:
-			addi $a0, $a0, 1
-			jal LoadColor
-			beq $v0, 0, Pixel3Up
-			li $v0, 1
-			j CollDone		
-		Pixel3Up:
-			addi $a0, $a0, 1
-			jal LoadColor
-			beq $v0, 0, NoCollUp
-			li $v0, 1
-			j CollDone		
-		
-		NoCollUp:
-			li $v0, 0
-			j CollDone
-		
-		
-		
-	CollDown:
-		bne $a3, 1,CollLeft
-		addi $a0, $a1, 4
-		Pixel0Down:
-			jal LoadColor
-			beq $v0, 0, Pixel1Down
-			li $v0, 1
-			j CollDone
-		
-		Pixel1Down:
-			addi $a0, $a0, 1
-			jal LoadColor
-			beq $v0, 0, Pixel2Down
-			li $v0, 1
-			j CollDone
-		Pixel2Down:
-			addi $a0, $a0, 1
-			jal LoadColor
-			beq $v0, 0, Pixel3Down
-			li $v0, 1
-			j CollDone		
-		Pixel3Down:
-			addi $a0, $a0, 1
-			jal LoadColor
-			beq $v0, 0, NoCollDown
-			li $v0, 1
-			j CollDone		
-		
-		NoCollDown:
-			li $v0, 0
-			j CollDone
-
-	CollLeft:
-		bne $a3, 2, CollRight
-		addi $a0, $a0, -1
-		Pixel0Left:
-			jal LoadColor
-			beq $v0, 0, Pixel1Left
-			li $v0, 1
-			j CollDone
-		
-		Pixel1Left:
-			addi $a1, $a1, 1
-			jal LoadColor
-			beq $v0, 0, Pixel2Left
-			li $v0, 1
-			j CollDone
-		Pixel2Left:
-			addi $a1, $a1, 1
-			jal LoadColor
-			beq $v0, 0, Pixel3Left
-			li $v0, 1
-			j CollDone		
-		Pixel3Left:
-			addi $a1, $a1, 1
-			jal LoadColor
-			beq $v0, 0, NoCollLeft
-			li $v0, 1
-			j CollDone		
-		
-		NoCollLeft:
-			li $v0, 0
-			j CollDone
-		
-
-	CollRight:
-		bne $a3, 3, CollDone
-		addi $a0, $a0, 4
-		Pixel0Right:
-			jal LoadColor
-			beq $v0, 0, Pixel1Right
-			li $v0, 1
-			j CollDone
-		
-		Pixel1Right:
-			addi $a1, $a1, 1
-			jal LoadColor
-			beq $v0, 0, Pixel2Right
-			li $v0, 1
-			j CollDone
-		Pixel2Right:
-			addi $a1, $a1, 1
-			jal LoadColor
-			beq $v0, 0, Pixel3Right
-			li $v0, 1
-			j CollDone		
-		Pixel3Right:
-			addi $a1, $a1, 1
-			jal LoadColor
-			beq $v0, 0, NoCollRight
-			li $v0, 1
-			j CollDone		
-		
-		NoCollRight:
-			li $v0, 0
-			j CollDone	
-	
-	
-	CollDone:
-	lw $ra, 0($sp) 
-	addi $sp, $sp, 4
-	jr $ra
-	
-LoadColor:
-	sll $t0, $a1, 6
-	addu $v0, $a0, $t0
-	sll $v0, $v0, 2
-	addu $v0, $v0, $gp
-	lw $v0, 0($v0)
-	jr $ra
-		
-	
-	
-	
-DrawPoint: 
-		sll $t0,$a1,6
-		addu $v0, $a0, $t0
-		sll $v0, $v0, 2
-		addu $v0, $v0, $gp
-		sw $a2, ($v0)
-		
-		jr $ra		
-				
-								
-DrawHorizontalLine:
-		
-		addi $a0, $t1, -4
-		sw $ra, 0($sp)
-		
-		sub $t9, $a3, $a0
-		move $t1, $a0
-		
-	HorizontalLoop:
-		
-		add $a0,$t1,$t9
-		jal DrawPoint
-		addi $t9, $t9, -1
-		
-		bge $t9, 0, HorizontalLoop
-		
-		lw $ra, 0($sp)
-		addi $sp, $sp, 4
-		
-		jr $ra
-		
-		
-DrawVerticalLine:
-		
-		addi $a0, $t1, -4
-		sw $ra, 0($sp)
-		
-		sub $t9, $a3, $a1
-		move $t1, $a1
-		
-	VerticalLoop:
-		
-		add $a1,$t1,$t9
-		jal DrawPoint
-		addi $t9, $t9, -1
-		
-		bge $t9, 0, VerticalLoop
-		
-		lw $ra, 0($sp)
-		addi $sp, $sp, 4
-		
-		jr $ra
+		#j SelectMode	
 DrawFrames:
 	
 	li $a0, 0
 	li $a1, 0
-	lw $a2, colorBrick
+	lw $a2, colorSilver
 	li $a3, 63
 	jal DrawHorizontalLine
 	
 	li $a0, 0
 	li $a1, 63
-	lw $a2, colorBrick
+	lw $a2, colorSilver
 	li $a3, 63
 	jal DrawHorizontalLine
 	
@@ -1757,13 +979,13 @@ DrawFrames:
 	
 	li $a0, 53
 	li $a1, 0		
-	lw $a2, colorBrick	
+	lw $a2, colorSilver	
 	li $a3, 63	
 	jal DrawVerticalLine	
 	
 	li $a0, 1
 	li $a1, 0		
-	lw $a2, colorBrick	
+	lw $a2, colorSilver	
 	li $a3, 63	
 	jal DrawVerticalLine
 	
@@ -1830,6 +1052,7 @@ DrawMap:
 		
 				
 	DrawMap2:
+
 		
 DrawObjects: 	
 
@@ -1840,7 +1063,7 @@ DrawObjects:
 	li $a0, 30
 	li $a1, 32
 	jal DrawGreenBlock
-					
+
 				
 # esperar y leer los botones													
 Begin_standby:
@@ -1862,7 +1085,7 @@ Standby:
 		j Standby
 		
 EndStandby:
-		j DrawObjects
+		j Begin_standby
 		
 
 
@@ -1992,6 +1215,9 @@ KeyPressed:
 		lw $ra, 0($sp)	
 		addi $sp, $sp, -4
 		jr $ra
+
+
+
 MoveBullets:
 	addi $sp, $sp, -4
 	sw $ra, 0($sp)
@@ -2353,21 +1579,7 @@ MoveBullets:
 		
 		lw $ra, 0($sp)
 		addi $sp, $sp, 4
-		jr $ra
-#$a0 x
-#$a1 y
-#$a3 dir														
-CheckBulletCollision:
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	bulletCollUp:
-		bne $a2, 0, bulletCollDown
-		
-	bulletCollDown:
-		bne $a2, 0, bulletCollLeft	
-	bulletCollLeft:
-																																																																
-																																																																
+		jr $ra																																																																
 
 MoveAgent:
 	addi $sp, $sp, -12
@@ -2540,3 +1752,812 @@ TryMoveAgent:
 	TryMoveAgentDone:
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4
+
+
+		
+DrawTank: 
+	addi $sp, $sp, -12
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	PlayerUp:
+		bne $a3, 0 , PlayerDown
+		addi $a0, $a0, 1
+		addi $a3, $a0, 1
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1, 3
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		
+		j EndDraw
+		
+	PlayerDown:	
+		bne $a3, 1, PlayerLeft
+		
+		addi $a0, $a0, 1
+		addi $a1, $a1, 3
+		addi $a3, $a0, 1
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		
+		j EndDraw
+		
+	PlayerLeft:
+		bne $a3, 2, PlayerRight
+		
+
+		addi $a0, $a0, 1
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a0, $a0, 1
+		addi $a1, $a1, 3
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+
+		j EndDraw
+		
+	PlayerRight:	
+		bne $a3, 3, EndDraw
+		
+
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1,1 
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1, 2
+		addi $a3, $a0, 3
+		jal DrawHorizontalLine
+		
+		lw $a0, 4($sp)
+		lw $a1, 8($sp)
+		addi $a1, $a1, 3
+		addi $a3, $a0, 2
+		jal DrawHorizontalLine
+		
+		addi $sp,$sp, 8
+			
+										
+	EndDraw: 	
+		lw $ra, 0($sp)		
+		addi $sp, $sp, 12																			
+		jr $ra						
+
+EraseTank: 
+	addi $sp, $sp, -12
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp)
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp)
+	addi $a1, $a1, 1
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp) 
+	addi $a1, $a1, 2 
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+	lw $a0, 4($sp)
+	lw $a0, 8($sp)
+	addi $a1, $a1, 3
+	li $a2, 0
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+	
+								
+	EndErase: 	
+	lw $ra, 0($sp)		
+	addi $sp, $sp, 12																			
+	jr $ra	
+
+CheckCollision:
+	addi $sp, $sp, -12
+	sw $ra, 0($sp)
+	sw $a0, 4($sp)
+	sw $a1, 8($sp)
+	
+	beq $a1, $a1, CheckCol
+	addi $a1, $a1, 1
+	jal CheckCollision
+	
+	CheckCol:
+		PlayerCol:
+			bne $a0, 0, EnemyCol
+			lw $a0, Ptankx
+			lw $a1, Ptanky
+			li $a2, 4
+			lw $a3, playerDir
+			jal CollisionDirection
+			j CheckCollisionDone
+			
+			
+	EnemyCol:
+			bne $a0, 1, Enemy2Col			
+	Enemy2Col:
+			bne $a0, 2, Enemy3Col	
+	Enemy3Col:
+			bne $a0, 3, Enemy4Col	
+	Enemy4Col:
+			bne $a0, 4, CheckCollisionDone
+			
+					
+	CheckCollisionDone:						
+		lw $ra, 0($sp)
+		addi $sp, $sp, 12
+		jr $ra
+
+CollisionDirection:
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	CollUp:
+		bne $a3, 0, CollDown
+		addi $a0, $a1, -1
+		Pixel0Up:
+			jal LoadColor
+			beq $v0, 0, Pixel1Up
+			li $v0, 1
+			j CollDone
+		
+		Pixel1Up:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, Pixel2Up
+			li $v0, 1
+			j CollDone
+		Pixel2Up:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, Pixel3Up
+			li $v0, 1
+			j CollDone		
+		Pixel3Up:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, NoCollUp
+			li $v0, 1
+			j CollDone		
+		
+		NoCollUp:
+			li $v0, 0
+			j CollDone
+		
+		
+		
+	CollDown:
+		bne $a3, 1,CollLeft
+		addi $a0, $a1, 4
+		Pixel0Down:
+			jal LoadColor
+			beq $v0, 0, Pixel1Down
+			li $v0, 1
+			j CollDone
+		
+		Pixel1Down:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, Pixel2Down
+			li $v0, 1
+			j CollDone
+		Pixel2Down:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, Pixel3Down
+			li $v0, 1
+			j CollDone		
+		Pixel3Down:
+			addi $a0, $a0, 1
+			jal LoadColor
+			beq $v0, 0, NoCollDown
+			li $v0, 1
+			j CollDone		
+		
+		NoCollDown:
+			li $v0, 0
+			j CollDone
+
+	CollLeft:
+		bne $a3, 2, CollRight
+		addi $a0, $a0, -1
+		Pixel0Left:
+			jal LoadColor
+			beq $v0, 0, Pixel1Left
+			li $v0, 1
+			j CollDone
+		
+		Pixel1Left:
+			addi $a1, $a1, 1
+			jal LoadColor
+			beq $v0, 0, Pixel2Left
+			li $v0, 1
+			j CollDone
+		Pixel2Left:
+			addi $a1, $a1, 1
+			jal LoadColor
+			beq $v0, 0, Pixel3Left
+			li $v0, 1
+			j CollDone		
+		Pixel3Left:
+			addi $a1, $a1, 1
+			jal LoadColor
+			beq $v0, 0, NoCollLeft
+			li $v0, 1
+			j CollDone		
+		
+		NoCollLeft:
+			li $v0, 0
+			j CollDone
+		
+
+	CollRight:
+		bne $a3, 3, CollDone
+		addi $a0, $a0, 4
+		Pixel0Right:
+			jal LoadColor
+			beq $v0, 0, Pixel1Right
+			li $v0, 1
+			j CollDone
+		
+		Pixel1Right:
+			addi $a1, $a1, 1
+			jal LoadColor
+			beq $v0, 0, Pixel2Right
+			li $v0, 1
+			j CollDone
+		Pixel2Right:
+			addi $a1, $a1, 1
+			jal LoadColor
+			beq $v0, 0, Pixel3Right
+			li $v0, 1
+			j CollDone		
+		Pixel3Right:
+			addi $a1, $a1, 1
+			jal LoadColor
+			beq $v0, 0, NoCollRight
+			li $v0, 1
+			j CollDone		
+		
+		NoCollRight:
+			li $v0, 0
+			j CollDone	
+	
+	
+	CollDone:
+	lw $ra, 0($sp) 
+	addi $sp, $sp, 4
+	jr $ra
+
+	
+LoadColor:
+	sll $t0, $a1, 6
+	addu $v0, $a0, $t0
+	sll $v0, $v0, 2
+	addu $v0, $v0, $gp
+	lw $v0, 0($v0)
+	jr $ra
+		
+	
+	
+	
+DrawPoint: 
+		sll $t0,$a1,6
+		addu $v0, $a0, $t0
+		sll $v0, $v0, 2
+		addu $v0, $v0, $gp
+		sw $a2, ($v0)
+		
+		jr $ra		
+				
+								
+DrawHorizontalLine:
+		
+		addi $sp, $sp, -4
+		sw $ra, 0($sp)
+		
+		sub $t9, $a3, $a0
+		move $t1, $a0
+		
+	HorizontalLoop:
+		
+		add $a0,$t1,$t9
+		jal DrawPoint
+		addi $t9, $t9, -1
+		
+		bge $t9, 0, HorizontalLoop
+		
+		lw $ra, 0($sp)
+		addi $sp, $sp, 4
+		
+		jr $ra
+		
+		
+DrawVerticalLine:
+		
+		addi $sp, $sp, -4
+		sw $ra, 0($sp)
+		
+		sub $t9, $a3, $a1
+		move $t1, $a1
+		
+	VerticalLoop:
+		
+		add $a1,$t1,$t9
+		jal DrawPoint
+		addi $t9, $t9, -1
+		
+		bge $t9, 0, VerticalLoop
+		
+		lw $ra, 0($sp)
+		addi $sp, $sp, 4
+		
+		jr $ra
+
+#Hace el fondo de la pantalla negra
+ClearBoard: 
+		lw $t0, backgroundColor
+		li $t1, 16384 #numero de pixeles en la pantalla
+	StartCLoop:
+		subi $t1, $t1, 4
+		addu $t2, $t1, $gp
+		sw $t0, ($t2)
+		beqz $t1, EndCLoop
+		j StartCLoop
+	EndCLoop: 
+		jr $ra
+
+										
+#$a0 posX
+#$a1 posY
+DrawOrangeBlock:
+
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+		
+	lw $a2, colorBrick
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorBrick
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorBrick
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorBrick
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4		
+		
+	jr $ra
+	
+	
+DrawGreenBlock:
+
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+		
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorGreen
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4		
+		
+	jr $ra
+	
+DrawSilverBlock:
+
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+		
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	addi $a1, $a1, 1
+	lw $a2, colorSilver
+	addi $a3, $a0, 3
+	jal DrawHorizontalLine
+		
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4		
+		
+	jr $ra
+
+Map1: 
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	
+	li $a0, 6
+	li $a1, 55
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 51
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 47
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 43
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 5
+	jal DrawOrangeBlock
+
+	li $a0, 6
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 6
+	li $a1 21
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 5
+	jal DrawOrangeBlock
+
+	li $a0, 14
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1 21
+	jal DrawOrangeBlock
+	
+	
+	li $a0, 14
+	li $a1, 55
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 51
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 47
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 43
+	jal DrawOrangeBlock
+	
+	
+	li $a0, 23
+	li $a1, 57
+	lw $a2, colorBrick
+	li $a3, 62
+	jal DrawVerticalLine
+	
+	li $a0, 24
+	li $a1, 57
+	lw $a2, colorBrick
+	li $a3, 62
+	jal DrawVerticalLine
+	
+	li $a0, 23
+	li $a1, 56 
+	lw $a2, colorBrick
+	addi $a3, $a0, 8
+	jal DrawHorizontalLine
+	
+	li $a0, 23
+	li $a1, 55
+	lw $a2, colorBrick
+	addi $a3, $a0, 8
+	jal DrawHorizontalLine
+	
+	li $a0, 30
+	li $a1, 57
+	lw $a2, colorBrick
+	li $a3, 62
+	jal DrawVerticalLine
+	
+	li $a0, 31
+	li $a1, 57
+	lw $a2, colorBrick
+	li $a3, 62
+	jal DrawVerticalLine
+	
+	
+	li $a0, 37
+	li $a1, 55
+	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 51
+	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 47
+	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 43
+	jal DrawOrangeBlock
+	#
+	
+	li $a0, 37
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 17
+	jal DrawOrangeBlock
+	#
+	
+	#
+	
+	li $a0, 29
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 29
+	li $a1, 29
+	jal DrawOrangeBlock
+	#
+	
+	#
+	
+	li $a0, 21
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 21
+	li $a1, 29
+	jal DrawOrangeBlock
+	#
+	li $a0, 21
+	li $a1, 17
+	jal DrawSilverBlock
+	#
+	
+	li $a0, 45
+	li $a1, 5
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 9
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 13
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 17
+	jal DrawOrangeBlock
+	#
+	
+	li $a0, 45
+	li $a1, 55
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 51
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 47
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 43
+	jal DrawOrangeBlock
+	
+	li $a0, 2
+	li $a1, 35
+	jal DrawSilverBlock
+	
+	li $a0, 10
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 49
+	li $a1, 35
+	jal DrawOrangeBlock
+		
+	li $a0, 37
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 14
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	li $a0, 41
+	li $a1, 35
+	jal DrawOrangeBlock
+	
+	lw $ra, 0($sp)
+	addi $sp, $sp, 4	
+	
+			
+	jr $ra		
+				
+						
+	
+			
+
+		
+
+		
+MovePlayer:
+			
+		
+		
+
+
+
+
+
+
+
+
+				
+
+#$a0 x
+#$a1 y
+#$a3 dir														
+CheckBulletCollision:
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	bulletCollUp:
+		bne $a2, 0, bulletCollDown
+		
+	bulletCollDown:
+		bne $a2, 0, bulletCollLeft	
+	bulletCollLeft:
+																																																																
