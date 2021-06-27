@@ -57,9 +57,9 @@
 	colorSilver: 	.word 0x00D3D3D3
 	colorGreen:	.word 0x00008000
 	backgroundColor:.word 0x00000000  
-	Begin:		.word 0         #No los tiene ernesto 
-	velocidad: 	.word 50	#
-	anchoPantalla:	.word 64	#
+	#Begin:		.word 0         #No los tiene ernesto 
+	#velocidad: 	.word 50	#
+	#anchoPantalla:	.word 64	#
 	map:		.word 1
 	
 	
@@ -1253,7 +1253,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColUpRight
+				bne $v0, $t0, checkOrangeColUpRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1267,7 +1267,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColUpLeft
+				bne $v0, $t0, checkSilverColUpLeft
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1282,7 +1282,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColUpRight
+				bne $v0, $t0, checkSilverColUpRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1297,7 +1297,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, bulletUp
+				bne $v0, $t0, bulletUp
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1340,7 +1340,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColDownRight
+				bne $v0, $t0, checkOrangeColDownRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1356,7 +1356,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColDownLeft
+				bne $v0, $t0, checkSilverColDownLeft
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1370,7 +1370,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColDownRight
+				bne $v0, $t0, checkSilverColDownRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1385,7 +1385,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, bulletDown
+				bne $v0, $t0, bulletDown
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1428,7 +1428,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColLeftDown
+				bne $v0, $t0, checkOrangeColLeftDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1443,7 +1443,7 @@ MoveBullets:
 				jal LoadColor
 				lw $t0, colorBlack
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColLeftUp
+				bne $v0, $t0, checkSilverColLeftUp
 				move $a0, $s1
 				addi $a1, $s2, 1
 				lw $a2, colorBlack
@@ -1458,7 +1458,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColLeftDown
+				bne $v0, $t0, checkSilverColLeftDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1515,7 +1515,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColRightDown
+				bne $v0, $t0, checkOrangeColRightDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1530,7 +1530,7 @@ MoveBullets:
 				jal LoadColor
 				lw $t0, colorBlack
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColRightUp
+				bne $v0, $t0, checkSilverColRightUp
 				move $a0, $s1
 				addi $a1, $s2, 1
 				lw $a2, colorBlack
@@ -1545,7 +1545,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColRightDown
+				bne $v0, $t0, checkSilverColRightDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1908,32 +1908,31 @@ EraseTank:
 	sw $a1, 8($sp)
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp)
+	lw $a1, 8($sp)
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp)
+	lw $a1, 8($sp)
 	addi $a1, $a1, 1
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp) 
+	lw $a1, 8($sp) 
 	addi $a1, $a1, 2 
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp)
+	lw $a1, 8($sp)
 	addi $a1, $a1, 3
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
-	
 								
 	EndErase: 	
 	lw $ra, 0($sp)		
@@ -1988,7 +1987,7 @@ CollisionDirection:
 	CollUp:
 		bne $a3, 0, CollDown
 		#Ajusta la coordenada para arriba 
-		addi $a0, $a1, -1
+		addi $a1, $a1, -1
 		Pixel0Up:
 			jal LoadColor
 			beq $v0, 0, Pixel1Up
@@ -2024,7 +2023,7 @@ CollisionDirection:
 		bne $a3, 1,CollLeft
 		
 		#Ajusta la coordenada
-		addi $a0, $a1, 4
+		addi $a1, $a1, 4
 		Pixel0Down:
 			jal LoadColor
 			beq $v0, 0, Pixel1Down
