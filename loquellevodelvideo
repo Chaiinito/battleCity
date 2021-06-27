@@ -1052,13 +1052,7 @@ DrawMap:
 
 		
 DrawObjects: 	
-	jal MoveBullets
 	
-	
-	#bloqueVerde
-	li $a0, 30
-	li $a1, 32
-	jal DrawGreenBlock
 
 				
 # esperar y leer los botones													
@@ -1066,6 +1060,13 @@ Begin_standby:
 		li $t0, 0x00000002 
 		
 Standby:
+		jal MoveBullets
+	
+	
+	#bloqueVerde
+		li $a0, 30
+		li $a1, 32
+		jal DrawGreenBlock
 		blez $t0, EndStandby
 		li $a0,10
 		li $v0, 32
@@ -1119,7 +1120,7 @@ KeyPressed:
 	Key_Shoot:	
 		bne $a0, 32, Key_None
 		lw $t0, playerBulletActive
-		beq  $t0, 1, Key_Done
+		beq $t0, 1, Key_Done
 		li $t0, 1
 		sw $t0, playerBulletActive
 		lw $t0, playerDir
@@ -1497,27 +1498,27 @@ EraseTank:
 	sw $a1, 8($sp)
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp)
+	lw $a1, 8($sp)
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp)
+	lw $a1, 8($sp)
 	addi $a1, $a1, 1
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp) 
+	lw $a1, 8($sp) 
 	addi $a1, $a1, 2 
 	li $a2, 0
 	addi $a3, $a0, 3
 	jal DrawHorizontalLine
 	
 	lw $a0, 4($sp)
-	lw $a0, 8($sp)
+	lw $a1, 8($sp)
 	addi $a1, $a1, 3
 	li $a2, 0
 	addi $a3, $a0, 3
@@ -1733,7 +1734,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColUpRight
+				bne $v0, $t0, checkOrangeColUpRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1747,7 +1748,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColUpLeft
+				bne $v0, $t0, checkSilverColUpLeft
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1762,7 +1763,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColUpRight
+				bne $v0, $t0, checkSilverColUpRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1777,7 +1778,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, bulletUp
+				bne $v0, $t0, bulletUp
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1803,7 +1804,7 @@ MoveBullets:
 			bne $s0, 1, moveBulletLeft
 			lw $s1, playerBulletPosX
 			lw $s2, playerBulletPosY
-			
+		 	
 			move $a0, $s1
 			move $a1, $s2
 			lw $a2, colorBlack
@@ -1820,7 +1821,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColDownRight
+				bne $v0, $t0, checkOrangeColDownRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1829,14 +1830,12 @@ MoveBullets:
 				li $t0, 0
 				sw $t0, playerBulletActive
 
-				
-				
 			checkOrangeColDownRight:
 				addi $a0, $s1, 1
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColDownLeft
+				bne $v0, $t0, checkSilverColDownLeft
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1844,13 +1843,14 @@ MoveBullets:
 				jal DrawPoint
 				li $t0, 0
 				sw $t0, playerBulletActive
+				j doneMoveBullet
 			
 			checkSilverColDownLeft:
 				move $a0, $s1
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColDownRight
+				bne $v0, $t0, checkSilverColDownRight
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1865,7 +1865,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, bulletDown
+				bne $v0, $t0, bulletDown
 				addi $a0, $s1, 1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1898,7 +1898,6 @@ MoveBullets:
 			addi $a3, $a1, 1
 			jal DrawVerticalLine
 			
-			
 			addi $s1, $s1, -1
 			sw $s1, playerBulletPosX
 			
@@ -1908,7 +1907,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColLeftDown
+				bne $v0, $t0, checkOrangeColLeftDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -1923,7 +1922,7 @@ MoveBullets:
 				jal LoadColor
 				lw $t0, colorBlack
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColLeftUp
+				bne $v0, $t0, checkSilverColLeftUp
 				move $a0, $s1
 				addi $a1, $s2, 1
 				lw $a2, colorBlack
@@ -1938,7 +1937,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColLeftDown
+				bne $v0, $t0, checkSilverColLeftDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
@@ -1994,7 +1993,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorBrick
-				bne $v0, $v0, checkOrangeColRightDown
+				bne $v0, $t0, checkOrangeColRightDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorBlack
@@ -2009,7 +2008,7 @@ MoveBullets:
 				jal LoadColor
 				lw $t0, colorBlack
 				lw $t0, colorBrick
-				bne $v0, $v0, checkSilverColRightUp
+				bne $v0, $t0, checkSilverColRightUp
 				move $a0, $s1
 				addi $a1, $s2, 1
 				lw $a2, colorBlack
@@ -2024,7 +2023,7 @@ MoveBullets:
 				move $a1, $s2
 				jal LoadColor
 				lw $t0, colorSilver
-				bne $v0, $v0, checkSilverColRightDown
+				bne $v0, $t0, checkSilverColRightDown
 				move $a0, $s1
 				move $a1, $s2
 				lw $a2, colorSilver
