@@ -2451,6 +2451,10 @@ Map1:
 	li $a0, 37
 	li $a1, 17
 	jal DrawOrangeBlock
+	
+	li $a0, 37
+	li $a1, 21
+	jal DrawOrangeBlock
 	#
 	
 	#
@@ -2491,15 +2495,24 @@ Map1:
 	jal DrawOrangeBlock
 	
 	li $a0, 21
-	li $a1, 13
+	li $a1, 17
 	jal DrawOrangeBlock
 	
 	li $a0, 21
 	li $a1, 29
 	jal DrawOrangeBlock
+	
 	#
-	li $a0, 21
-	li $a1, 17
+	li $a0, 25
+	li $a1, 13
+	jal DrawSilverBlock
+	
+	li $a0, 2
+	li $a1, 35
+	jal DrawSilverBlock
+	
+	li $a0, 49
+	li $a1, 35
 	jal DrawSilverBlock
 	#
 	
@@ -2517,6 +2530,10 @@ Map1:
 	
 	li $a0, 45
 	li $a1, 17
+	jal DrawOrangeBlock
+	
+	li $a0, 45
+	li $a1, 21
 	jal DrawOrangeBlock
 	#
 	
@@ -2536,9 +2553,6 @@ Map1:
 	li $a1, 43
 	jal DrawOrangeBlock
 	
-	li $a0, 2
-	li $a1, 35
-	jal DrawSilverBlock
 	
 	li $a0, 10
 	li $a1, 35
@@ -2548,9 +2562,6 @@ Map1:
 	li $a1, 35
 	jal DrawOrangeBlock
 	
-	li $a0, 49
-	li $a1, 35
-	jal DrawOrangeBlock
 		
 	li $a0, 37
 	li $a1, 35
@@ -2563,6 +2574,8 @@ Map1:
 	li $a0, 41
 	li $a1, 35
 	jal DrawOrangeBlock
+	
+
 	
 	lw $ra, 0($sp)
 	addi $sp, $sp, 4	
