@@ -1130,7 +1130,7 @@ KeyPressed:
 			bne $t0, 0, bulletDownDir
 			lw $t1, Ptankx
 			addi $t1, $t1, 1
-			sw $t0, playerBulletPosX
+			sw $t1, playerBulletPosX
 			move $a0, $t1
 			lw $t1, Ptanky
 			addi $t1, $t1, -1
@@ -1146,8 +1146,8 @@ KeyPressed:
 			bne $t0, 1, bulletLeftDir
 			lw $t1, Ptankx
 			addi $t1, $t1, 1
-			sw $t0, playerBulletPosX
-			move $a0,$t1 
+			sw $t1, playerBulletPosX
+			move $a0, $t1 
 			lw $t1, Ptanky                                                                                                              
 			addi $t1, $t1, 4
 			sw $t1, playerBulletPosY
@@ -1175,14 +1175,14 @@ KeyPressed:
 			j Key_Done
 			
 		bulletRightDir:
-			bne $t0, 3, bulletRightDir
+			bne $t0, 3, Key_Done
 			lw $t1, Ptankx
 			addi $t1, $t1, 4
-			sw $t0, playerBulletPosX
+			sw $t1, playerBulletPosX
 			move $a0, $t1
-			lw $t0, Ptanky
+			lw $t1, Ptanky
 			addi $t1, $t1, 1
-			sw $t0, playerBulletPosY
+			sw $t1, playerBulletPosY
 			move $a1, $t1	
 			lw $a2, colorWhite
 			addi $a3, $a1, 1
