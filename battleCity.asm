@@ -2576,6 +2576,35 @@ Map1:
 	li $a1, 35
 	jal DrawOrangeBlock
 	
+	
+	#Aguila 
+	
+	li $a0, 26
+	li $a1, 59
+	lw $a2, colorSilver
+	jal DrawPoint
+	
+	li $a0, 28
+	li $a1, 59
+	lw $a2, colorSilver
+	jal DrawPoint
+	
+	li $a0, 27
+	li $a1, 60
+	lw $a2, colorSilver
+	jal DrawPoint
+	
+	li $a0, 26
+	li $a1, 61
+	lw $a2, colorSilver
+	jal DrawPoint
+	
+	li $a0, 28
+	li $a1, 61
+	lw $a2, colorSilver
+	jal DrawPoint
+
+
 
 	
 	lw $ra, 0($sp)
