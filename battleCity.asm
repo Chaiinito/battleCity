@@ -9,7 +9,7 @@
 	
 	#Jugador 
 	Ptankx:		.word 18
-	Ptanky:		.word 40 
+	Ptanky:		.word 59 
 	playerDir:	.word 0x00000000
 	colorTank:	.word 0x00FFFF00
 	playerState: 	.word 0x00ffff00
@@ -57,11 +57,7 @@
 	colorSilver: 	.word 0x00D3D3D3
 	colorGreen:	.word 0x00008000
 	backgroundColor:.word 0x00000000  
-	#Begin:		.word 0         #No los tiene ernesto 
-	#velocidad: 	.word 50	#
-	#anchoPantalla:	.word 64	#
 	map:		.word 1
-	
 	
 	
 .text
@@ -1064,25 +1060,33 @@ DrawMap:
 	DrawMap2:
 		
 DrawObjects: 
-	lw $t0, playerBulletActive
-	beq $t0, 0, continue
+	#lw $t0, playerBulletActive
+	#beq $t0, 0, continue
 	
-	continue:
+	#continue:
 	 	
 
-	jal MoveBullets
+	#jal MoveBullets
 	
 	
-	bloqueVerde:
-		li $a0, 30
-		li $a1, 32
-		jal DrawGreenBlock
+	#bloqueVerde:
+		#li $a0, 30
+		#li $a1, 32
+		#jal DrawGreenBlock
 
 #Espera y lee los botones	
 Begin_standby:
 		li $t0, 0x00000002  #carga 25 en el contador para stabndby -50ms 
 		
 Standby:
+		jal MoveBullets
+	
+	
+	#bloqueVerde
+		li $a0, 30
+		li $a1, 32
+		jal DrawGreenBlock
+		
 		blez $t0, EndStandby
 		li $a0, 10
 		li $v0, 32 #pasusa por 10 ms
@@ -1142,9 +1146,9 @@ KeyPressed:
 		j Key_Done
 		
 	Key_Shoot:	
-		bne $a0, 32, Key_Done #space
+		bne $a0, 32, Key_None
 		lw $t0, playerBulletActive
-		beq  $t0, 1, Key_Done
+		beq $t0, 1, Key_Done
 		li $t0, 1
 		sw $t0, playerBulletActive
 		lw $t0, playerDir
@@ -1171,9 +1175,9 @@ KeyPressed:
 			lw $t1, Ptankx
 			addi $t1, $t1, 1
 			sw $t1, playerBulletPosX
-			move $a0,$t1 
-			lw $t1, Ptanky
-			addi $t1, $t1, 3
+			move $a0, $t1 
+			lw $t1, Ptanky                                                                                                              
+			addi $t1, $t1, 4
 			sw $t1, playerBulletPosY
 			move $a1, $t1
 			lw $a2, colorWhite
@@ -1199,9 +1203,9 @@ KeyPressed:
 			j Key_Done
 			
 		bulletRightDir:
-			bne $t0, 3, bulletRightDir
+			bne $t0, 3, Key_Done
 			lw $t1, Ptankx
-			addi $t1, $t1, 3
+			addi $t1, $t1, 4
 			sw $t1, playerBulletPosX
 			move $a0, $t1
 			lw $t1, Ptanky
@@ -1230,11 +1234,11 @@ MoveBullets:
 	addi $sp, $sp, -4
 	sw $ra, 0($sp)
 	movePlayerBullet:
-		lw $t0 playerBulletDir
+		lw $s0 playerBulletActive
 		bne $s0, 1, moveEnemyBullet
 		lw $s0 playerBulletDir
 		moveBulletUp:
-			bne $t0, 0, moveBulletDown
+			bne $s0, 0, moveBulletDown
 			lw $s1, playerBulletPosX
 			lw $s2, playerBulletPosY
 			
@@ -1323,7 +1327,7 @@ MoveBullets:
 			bne $s0, 1, moveBulletLeft
 			lw $s1, playerBulletPosX
 			lw $s2, playerBulletPosY
-			
+		 	
 			move $a0, $s1
 			move $a1, $s2
 			lw $a2, colorBlack
@@ -1349,8 +1353,6 @@ MoveBullets:
 				li $t0, 0
 				sw $t0, playerBulletActive
 
-				
-				
 			checkOrangeColDownRight:
 				addi $a0, $s1, 1
 				move $a1, $s2
@@ -1364,6 +1366,7 @@ MoveBullets:
 				jal DrawPoint
 				li $t0, 0
 				sw $t0, playerBulletActive
+				j doneMoveBullet
 			
 			checkSilverColDownLeft:
 				move $a0, $s1
@@ -1418,7 +1421,6 @@ MoveBullets:
 			addi $a3, $a1, 1
 			jal DrawVerticalLine
 			
-			
 			addi $s1, $s1, -1
 			sw $s1, playerBulletPosX
 			
@@ -1466,7 +1468,6 @@ MoveBullets:
 				jal DrawVerticalLine
 				li $t0, 0
 				sw $t0, playerBulletActive
-				
 				
 			checkSilverColLeftDown:
 				move $a0, $s1
